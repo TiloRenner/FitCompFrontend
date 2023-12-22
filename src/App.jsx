@@ -19,11 +19,11 @@ const router = createBrowserRouter(
       loader={homeLoader}
       />
       <Route 
-        path="assessment" 
+        path="assessment/:category/:step?" 
         element={<AbfrageTest/>}
         loader={abfrageLoader}/>
       <Route path="help" element={<HelpLayout/>}>
-        <Route path="faq/:category/:step?" element={<Faq/>}/>
+        <Route path="faq" element={<Faq/>}/>
 
       </Route>
 

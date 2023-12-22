@@ -6,11 +6,11 @@ export default function Home()
 {
     const categories = useLoaderData()
     console.log("Home", categories)
-    return <h1>HalloHome <br></br> {categories.map((element)=> {
+    return <h1>HalloHome <br></br> {categories.map((element,index)=> {
 
 
         return (
-                   <NavLink to = "assessment"><button>{element}</button></NavLink> 
+                   <NavLink to = {"assessment/" + element.id +"/1"} key={index}><button>{element.nameGerman}</button></NavLink> 
 
         )
 

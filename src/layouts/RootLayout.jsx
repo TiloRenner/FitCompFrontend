@@ -5,7 +5,7 @@ export default function RootLayout(){
 
     return(
         <div className="root-layout">
-            <header>
+            <header className="topnav">
                 <h1>RootLayout und So, Navbar</h1>
                 
                 <NavLink to="help">Help</NavLink>
