@@ -10,6 +10,7 @@ export default function AbfrageTest({abfrage}){
 
     const navigate = useNavigate()
     const [currentCategory,setCurrentCategory] = useState()
+    const [answeredQuestions,setAnsweredQuestions] = useState([])
     const {category: categoryParam} = useParams();
     const {step: stepParam} = useParams();
 
