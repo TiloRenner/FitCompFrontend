@@ -20,9 +20,12 @@ export default function AbfrageTest({abfrage}){
 
     const nextStep = Number(stepParam)+1
 
+
     
 
+    const questions = useLoaderData()
 
+    console.log("QState:", answeredQuestions)
     console.log("PageDataA - state:", currentCategory, " Category: ", categoryParam," Step: ", stepParam)
 
 //Todo Move State to App
@@ -38,9 +41,7 @@ export default function AbfrageTest({abfrage}){
             {
                 console.log("FixPageReroute!!!:::" , categoryParam, " State: " ,)
                 navigate("/");
-    
             }
-    
         }
 
     },[]
@@ -50,23 +51,41 @@ export default function AbfrageTest({abfrage}){
 
     console.log("PageDataB - state:", currentCategory, " Category: ", categoryParam," Step: ", stepParam)
 
-    const questions = useLoaderData()
-    let displayCont = buildPage([1,1,1,2])
+
+    //let displayCont = buildPage([1,1,1,2])
     console.log("Content:", questions)
 
         
-    function gotoNextPage()
+    function gotoNextPage(value)
     {
+        const currentQuestionId = questions.questions[stepParam-1].questionId;
+        console.log("ID:", currentQuestionId)
+        const newAnsweredQuestions = setCurrentAnswer(value,currentQuestionId,answeredQuestions)
+        setAnsweredQuestions(newAnsweredQuestions)
         navigate("/assessment/" + categoryParam + "/" + (nextStep))
     }
 
-    return <>
-        <h2>{questions.questions[0].questionTextGerman}</h2>
-        <div>{buildQuestionLayout(questions.questions[0],gotoNextPage)}</div>
+    function sendAssessmentResults()
+    {
+        
+    }
+
+    if(stepParam > questions.steps)
+    {
+        return <>
+            <AssessmentOverview questions = {questions.questions} answers = {answeredQuestions}/>
+        </>
+    }
+    else
+    {
+        return <>
+        <h2>{questions.questions[stepParam-1].questionTextGerman}</h2>
+        <div>{buildQuestionLayout(questions.questions[stepParam-1],gotoNextPage)}</div>
     <br></br>
-    <h2>{questions.questions[1].questionTextGerman}</h2>
-        <div>{buildQuestionLayout(questions.questions[1],gotoNextPage)}</div>
     </>
+    }
+
+
 
 
 
@@ -87,35 +106,122 @@ function isPageValid()
 
 }
 
-function finishCurrentPage(value)
+function setCurrentAnswer(value,pageQuestionId,oldAnsweredQuestions)
 {
     //const navigate = useNavigate()
     console.log("ButtonValue:", value)
+    //todo check answeredQuestions if answer exists for Q-ID
+
+    
+
+    if (oldAnsweredQuestions)
+    {
+        console.log("AddValue to State ID", pageQuestionId, "oldQuestions:", oldAnsweredQuestions)
+        //const pageQuestionId = 100;
+        const newAnsweredQuestions = oldAnsweredQuestions.filter((element) => {
+            if(element.questionId == pageQuestionId)
+            { return false; }
+
+            return true;
+        }).concat([{questionId: pageQuestionId, valueEntered:value}]);
+
+        //setAnsweredQuestions(newAnsweredQuestions);
+        return newAnsweredQuestions;
+
+    }
+
+    return null
+
+    
+
     
 
 }
 
 
-function buildQuestionLayout(question,gotoNext){
+function buildQuestionLayout(question,gotoNextPage){
     console.log("Question to build from" , question)
 
     if(question.answerType == "fixed")
     {
         const displayAnswers = question.answers.map((element,index) => 
         {
-            return <button value = {element.value} onClick={(e)=> {finishCurrentPage(e.target.value); gotoNext()}} key={index}>{element.aTextGerman}</button>
+            return <button value = {element.value} onClick={(e)=> { gotoNextPage(e.target.value)}} key={index}>{element.aTextGerman}</button>
         }
         )
         return displayAnswers;
     }
     else if(question.answerType == "slider")
     {
-        return <div className="slidecontainer">
-        <input type="range" min="1" max="100" defaultValue="50" className="slider" id="myRange"></input><p>{question.answers[0].aTextGerman}</p>
-        <button>Weiter</button>
-      </div>
+        return <Slider question={question} gotoNextPage = {gotoNextPage}/>
 
     }
+
+}
+
+function Slider({question,gotoNextPage})
+{
+    const [sliderValue,setSilderValue] = useState(50)
+
+    function sendValue(e)
+    {
+        console.log("setValue:", sliderValue)
+        gotoNextPage(sliderValue)
+    }
+
+
+    return <div className="slidecontainer">
+    <input type="range" min={question.answers[0].valueMin} max={question.answers[0].valueMax} value={sliderValue} defaultValue="50" className="slider" id="myRange" onChange={(e) => setSilderValue(e.target.value)}></input><p>{sliderValue} {question.answers[0].aTextGerman}</p>
+    <button onClick={sendValue}>Weiter</button>
+  </div>
+
+}
+
+
+function AssessmentOverview({questions,answers})
+{
+
+
+
+    console.log("AssQuestions:", questions, " AssAnswers: ",answers)
+    const questionsDisplay = questions.map((question) =>
+    {
+        console.log("CurrentQuestion", question.questionId)
+        const matchingAnswer= answers.find((answer) => answer.questionId == question.questionId)
+        console.log("MatchingAnswer: " , matchingAnswer)
+
+        if(matchingAnswer)
+        {
+
+            console.log(question.questionTextGerman)
+            return <div>
+                <h3>{question.questionTextGerman}</h3>
+                <p>{matchingAnswer.valueEntered}</p>
+                <br></br>
+            </div>
+        }
+        else
+        {
+
+            return <div>
+            <h1>{question.questionTextGerman}</h1>
+            <p>No value</p>
+            <br></br>
+        </div>
+        }
+
+        
+
+    })
+    console.log(questionsDisplay)
+
+    return <div>
+        <h2>Overview</h2>
+        {questionsDisplay}
+
+
+
+    </div>
 
 }
 
