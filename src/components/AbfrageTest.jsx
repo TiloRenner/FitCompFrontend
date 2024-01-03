@@ -62,18 +62,27 @@ export default function AbfrageTest({abfrage}){
         console.log("ID:", currentQuestionId)
         const newAnsweredQuestions = setCurrentAnswer(value,currentQuestionId,answeredQuestions)
         setAnsweredQuestions(newAnsweredQuestions)
+
+        //check if next step is already done, if so skip
+        
+
         navigate("/assessment/" + categoryParam + "/" + (nextStep))
     }
 
-    function sendAssessmentResults()
+    function gotoPage(pagenum)
     {
-        
+        navigate("/assessment/" + categoryParam + "/" + (pagenum))
+    }
+
+    function sendAssessmentAnswers()
+    {
+        console.log("send answers")
     }
 
     if(stepParam > questions.steps)
     {
         return <>
-            <AssessmentOverview questions = {questions.questions} answers = {answeredQuestions}/>
+            <AssessmentOverview questions = {questions.questions} answers = {answeredQuestions} gotoPage= {gotoPage} sendAssessmentAnswers={sendAssessmentAnswers}/>
         </>
     }
     else
@@ -178,13 +187,13 @@ function Slider({question,gotoNextPage})
 }
 
 
-function AssessmentOverview({questions,answers})
+function AssessmentOverview({questions,answers,gotoPage,sendAssessmentAnswers})
 {
 
 
 
     console.log("AssQuestions:", questions, " AssAnswers: ",answers)
-    const questionsDisplay = questions.map((question) =>
+    const questionsDisplay = questions.map((question,index) =>
     {
         console.log("CurrentQuestion", question.questionId)
         const matchingAnswer= answers.find((answer) => answer.questionId == question.questionId)
@@ -194,9 +203,10 @@ function AssessmentOverview({questions,answers})
         {
 
             console.log(question.questionTextGerman)
-            return <div>
+            return <div key={index}>
                 <h3>{question.questionTextGerman}</h3>
                 <p>{matchingAnswer.valueEntered}</p>
+                <button onClick={(e)=> { gotoPage(index+1)}}>Change</button>
                 <br></br>
             </div>
         }
@@ -218,6 +228,7 @@ function AssessmentOverview({questions,answers})
     return <div>
         <h2>Overview</h2>
         {questionsDisplay}
+        <button onClick={(e)=> { sendAssessmentAnswers()}}>Send</button>
 
 
 
