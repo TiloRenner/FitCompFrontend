@@ -44,8 +44,6 @@ function App() {
     <RouterProvider router={router}>
       <AbfrageTest/>
     </RouterProvider>
-
-    
   )
 }
 

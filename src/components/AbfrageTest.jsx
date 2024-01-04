@@ -77,6 +77,41 @@ export default function AbfrageTest({abfrage}){
     function sendAssessmentAnswers()
     {
         console.log("send answers")
+
+        const assesmentDataToSend = 
+        {
+            category:currentCategory,
+            answers: answeredQuestions
+
+
+        }
+
+        const fetchAdjustedProduct = async ()=>
+          {
+
+            console.log("Try Fetch Product")
+            try{
+              const response = await fetch(API_URL + "/getadjustedproduct",{
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(assesmentDataToSend),
+               });
+
+               const data = await response.json()
+               console.log("ProductData: ", data)
+            }
+            catch(err)
+            {
+              console.error ('There has been a problem with your fetch operation: ', err.message);
+            }
+
+          };
+
+        fetchAdjustedProduct();
+
+
     }
 
     if(stepParam > questions.steps)
@@ -93,11 +128,6 @@ export default function AbfrageTest({abfrage}){
     <br></br>
     </>
     }
-
-
-
-
-
 
 }
 
