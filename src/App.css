@@ -10,6 +10,25 @@
   /* height: 100vh; */
 }
 
+h3 {
+
+  color: #00BBE4;
+}
+
+nav {
+  background-color: #00BBE4;
+}
+
+footer {
+  background-color: #0066A4;
+}
+
+.callbtn {
+  background-color: #FF9E1F;
+}
+section {
+  background-color: #FDFAFE;
+}
 /* 
 
 .logo {
