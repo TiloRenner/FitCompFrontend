@@ -1,4 +1,5 @@
-
+import React, { useContext, useState } from 'react';
+import { StepContext } from '../stepContext';
 
     export function Question1({ onChange, fragen }) {
         return (
@@ -43,14 +44,22 @@
    }
 
    export function Question4({ onChange, fragen }) {
+    const { step } = useContext(StepContext);
+    const [localValue, setLocalValue] = useState(fragen && fragen[step - 1] ? fragen[step - 1] : '');
+   
+    const handleLocalChange = (event) => {
+     const newValue = event.target.value;
+     setLocalValue(newValue);
+     onChange(event);
+    };
+   
     return (
-    <>
-    
-    <h2 className="text-3xl pb-5">Wie alt bist du?</h2>
-
-    <input className="border-grey-100 border-solid border-2 rounded-lg" name="alter" type="number" value={fragen} onChange={onChange}  />
-    </>
-    )
+     <>
+       <h2 className="text-3xl pb-5">Wie alt bist du?</h2>
+       <p>Dein Alter: {localValue}</p>
+       <input className="border-grey-100 border-solid border-2 rounded-lg" name="alter" type="range" min="1" max="100" value={localValue} onChange={handleLocalChange} />
+     </>
+    );
    }
 
    export function Question5({ onChange, fragen }) {

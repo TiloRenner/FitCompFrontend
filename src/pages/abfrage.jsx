@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Question1, Question2, Question3, Question4, Question5, Question6, Question7, Question8, Question9, Question10, Question11 } from "../components/Fragen";
 import { ProgressBar } from "../components/ProgressBar";
 import { useNavigate } from "react-router-dom";
+import { StepContext } from "../components/stepContext";
 
 
 
@@ -143,7 +144,10 @@ export default function Abfrage () {
                   {step === 1 && <Question1 onChange={handleChange} value={fragen}  />}
                   {step === 2 && <Question2 onChange={handleChange} value={fragen}  />}   
                   {step === 3 && <Question3 onChange={handleChange} value={fragen}  />}  
-                  {step === 4 && <Question4 onChange={handleChange} value={fragen}  />}  
+                  <StepContext.Provider value={{ step, setStep }}>
+
+                  {step === 4 && <Question4 onChange={handleChange} value={fragen}  />} 
+                  </StepContext.Provider>
                   {step === 5 && <Question5 onChange={handleChange} value={fragen}  />}  
                   {step === 6 && <Question6 onChange={handleChange} value={fragen}  />}  
                   {step === 7 && <Question7 onChange={handleChange} value={fragen}  />}  

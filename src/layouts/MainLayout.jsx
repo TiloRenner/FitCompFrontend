@@ -8,7 +8,7 @@ export default function MainLayout() {
     return (
         <div >
             <Header />
-            <main className="h-96">
+            <main className="h-full">
                <Outlet/>
             </main>
             <Footer />
