@@ -1,54 +1,51 @@
-import { NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom"
 import { useState, useContext } from "react";
 import { AuthContext } from "../components/authContext";
 
-export default function Login () {
+export default function Register () {
 
-    
     const [username, setName] = useState('');
     const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('');
     const { authToken, setAuthToken} = useContext(AuthContext)
 
 
-
     const handleSubmit = async (event) => {
-      event.preventDefault();
-      
-      //const baseURL = "http://localhost:8080/";
-      const baseURL = "";
-
-      fetch(baseURL + '/authentication/login', {
-       method: 'POST',
-       headers: {
-         'Content-Type': 'application/json',
-       },
-       body: JSON.stringify({ username, password }),
-      })
-      .then(response => {
-       if (!response.ok) {
-         throw new Error(`HTTP error! status: ${response.status}`);
-       }
-       return response.json();
-      })
-      .then(data => {
-       // Benutzer wurde erfolgreich authentifiziert
-       if(data.login_token)
-       {
-        console.log("Token found :", data.login_token)
-        setAuthToken(data.login_token)
-       }
-       console.log("Success");
-       console.log(data);
-       
-      })
-      .catch(error => {
-       // Es gab einen Fehler bei der Authentifizierung
-       console.log("Error");
-       console.log(error);
-      });
-      };
-
-
+        event.preventDefault();
+        
+        //const baseURL = "http://localhost:8080/";
+        const baseURL = "";
+  
+        fetch(baseURL + ' /authentication/register', {
+         method: 'POST',
+         headers: {
+           'Content-Type': 'application/json',
+         },
+         body: JSON.stringify({ username, email, password }),
+        })
+        .then(response => {
+         if (!response.ok) {
+           throw new Error(`HTTP error! status: ${response.status}`);
+         }
+         return response.json();
+        })
+        .then(data => {
+         // Benutzer wurde erfolgreich authentifiziert
+         if(data.login_token)
+         {
+          console.log("Token found :", data.login_token)
+          setAuthToken(data.login_token)
+         }
+         console.log("Success");
+         console.log(data);
+         
+        })
+        .catch(error => {
+         // Es gab einen Fehler bei der Authentifizierung
+         console.log("Error");
+         console.log(error);
+        });
+        };
 
     return (
     <>
@@ -61,7 +58,7 @@ export default function Login () {
                             </svg>
                     </div> 
                     <div className="flex flex-col justify-center items-center space-y-4">
-                    <h3>Login</h3>
+                    <h3>Registrierung</h3>
                     <div className="relative">
                     <input className="pl-10 h-10 border-grey-100 border-solid border-2 rounded-lg" type="text" placeholder="Benutzername" value={username} onChange={(e) => setName(e.target.value)} />
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -71,16 +68,24 @@ export default function Login () {
                     </div>
                     </div>
                     <div className="relative">
-                    <input className=" pl-10 h-10 border-grey-100 border-solid border-2 rounded-lg" type="text" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                    <input className="pl-10 h-10 border-grey-100 border-solid border-2 rounded-lg" type="text" placeholder="e-Mail" value={email} onChange={(e) => setEmail(e.target.value)} />
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="grey" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+                    </svg>
+
+                    </div>
+                    </div>
+                    <div className="relative">
+                    <input className=" pl-10 h-10 border-grey-100 border-solid border-2 rounded-lg" type="text" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}/>
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="grey" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
                     </svg>
                     </div>
                     </div>
-                    <span className="flex justify-end" style={{fontSize: "12px"}}>Forget password?</span>
-                    <button onClick={handleSubmit} className="callbtn">Login</button>
-                    <p className="text-gray-500" style={{fontSize: "11px"}}>Du hast noch keinen Account? Registriere dich <NavLink to="/register"><span className="register_login">hier</span> </NavLink>?</p>
+                    <button onClick={handleSubmit} className="callbtn">Registrieren</button>
+                    <p className="text-gray-500" style={{fontSize: "11px"}}>Du hast bereits einen Account? Melde dich <NavLink to="/login"><span className="register_login">hier</span> </NavLink> an?</p>
                     </div>
                     </div>
             </div>
