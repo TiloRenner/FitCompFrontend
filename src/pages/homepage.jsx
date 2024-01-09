@@ -41,7 +41,7 @@ return (
         <img className="my-8" src={step3} alt="" />   
         <p>Jetzt liegt es an dir deinen Trainingsplan zu starten und dein Leben zum Positiven zu verändern! </p> 
         </div> </div>
-    <NavLink to="/abfrage" ><button className="callbtn text-lg text-white py-4 rounded-3xl w-60">Create your plan now</button></NavLink>
+    <NavLink to="/abfrage" ><button className="callbtn">Create your plan now</button></NavLink>
     </section>
 </>
 )
