@@ -24,7 +24,7 @@ export const homeLoader = async ()=> {
 
     try{
         console.log("Try Fetch for Home")
-        const res = await fetch(API_URL+ '/categories')
+        const res = await fetch(API_URL+ '/assessment/categories')
         console.log("Response: ", res)
         return res.json()
     }

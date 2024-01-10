@@ -291,7 +291,7 @@ export const abfrageLoader = async()=>
 {
     try{
         console.log("Try Fetch for Assessment")
-        const res = await fetch(API_URL+ '/questions')
+        const res = await fetch(API_URL+ '/assessment/questions')
         console.log("Response: ", res)
         return res.json()
     }
