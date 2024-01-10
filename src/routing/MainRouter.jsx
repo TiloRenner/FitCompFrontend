@@ -7,6 +7,7 @@ import Login from '../pages/login';
 import NotFoundPage from '../components/NotFoundPage';
 import Abfrage from '../pages/abfrage';
 import DankeAbfrage from '../pages/dankeabfrage';
+import ResultAbfrage from '../pages/resultabfrage';
 import Register from '../pages/register'
 
 
@@ -23,6 +24,7 @@ export const router = createBrowserRouter(
             <Route path="aboutus" element={<AboutUs />} />
             <Route path="impressum" element={<Impressum />} />
             <Route path="abfrage" element={<Abfrage />} />
+            <Route path="result" element={<ResultAbfrage />} />
             <Route path="danke" element={<DankeAbfrage />} />
             
             

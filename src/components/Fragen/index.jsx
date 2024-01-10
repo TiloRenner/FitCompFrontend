@@ -79,7 +79,7 @@ import { StepContext } from '../stepContext';
     
     <h2 className="text-3xl pb-5">Männlich oder weiblich?</h2>
     <label htmlFor="männlich" className="block text-sm font-medium text-gray-700">männlich</label>
-    <input className="border-grey-100 border-solid border-2 rounded-lg" id="männlich" name="Geschlecht" type="radio" value="männlich" checked={fragen}   onChange={onChange}  />
+    <input className="border-grey-100 border-solid border-2 rounded-lg" id="männlich" name="Geschlecht" type="radio" value="männlich" checked={fragen} onChange={onChange}  />
     <label htmlFor="weiblich" className="block text-sm font-medium text-gray-700">weiblich</label>
     <input className="border-grey-100 border-solid border-2 rounded-lg" id="weiblich" name="Geschlecht" type="radio" value="weiblich" checked={fragen} onChange={onChange}  />
     </>

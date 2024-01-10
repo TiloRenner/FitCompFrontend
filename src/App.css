@@ -10,6 +10,10 @@
   /* height: 100vh; */
 }
 
+main {
+  background-color: #FDFAFE;
+}
+
 h3 {
 
   color: #00BBE4;
@@ -42,6 +46,10 @@ font-size: 12px;
 color: #00BBE4;
 text-decoration: underline;
 
+}
+
+.cssborder {
+border-color: #0066A4;
 }
 /* 
 

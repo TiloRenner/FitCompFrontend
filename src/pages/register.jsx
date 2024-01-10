@@ -13,10 +13,10 @@ export default function Register () {
     const handleSubmit = async (event) => {
         event.preventDefault();
         
-        //const baseURL = "http://localhost:8080/";
-        const baseURL = "";
+        const baseURL = "http://localhost:8080/";
+        // const baseURL = "";
   
-        fetch(baseURL + ' /authentication/register', {
+        fetch(baseURL + ' /register', {
          method: 'POST',
          headers: {
            'Content-Type': 'application/json',
