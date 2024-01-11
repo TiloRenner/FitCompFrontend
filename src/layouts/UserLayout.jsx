@@ -1,10 +1,16 @@
-import React from 'react'
+import React from 'react';
 
-export default function BlogLayout({children}) {
+import FooterUser from '../components/FooterUser';
+import HeaderUser from '../components/HeaderUser/headeruser';
+
+export default function UserLayout({children}) {
   return (
-    <div style={{border: "2px solid lightgray"}}>
-
+    <div>
+        <HeaderUser  />
+        <main className='h-screen'>
         {children}
+        </main>
+        <FooterUser  />
     </div>
   )
 }

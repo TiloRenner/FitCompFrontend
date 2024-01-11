@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-
+import { NavLink } from "react-router-dom";
 
 
 export default function ResultAbfrage () {
@@ -59,7 +59,7 @@ export default function ResultAbfrage () {
         </div>
         <div className="text-white space-y-4">
         <p>Jetzt loslegen und Registrieren</p>
-        <button className="callbtn">Training starten</button>
+        <NavLink to="/register"><button className="callbtn">Training starten</button></NavLink>
         </div>
         </div>
     </>

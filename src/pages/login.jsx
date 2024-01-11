@@ -14,10 +14,10 @@ export default function Login () {
     const handleSubmit = async (event) => {
       event.preventDefault();
       
-      const baseURL = "http://localhost:8080/";
+      const baseURL = "http://localhost:8080";
       // const baseURL = "";
 
-      fetch(baseURL + '/register', {
+      fetch(baseURL + '/authentication/login' , {
        method: 'POST',
        headers: {
          'Content-Type': 'application/json',
