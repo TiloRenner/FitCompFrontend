@@ -45,7 +45,7 @@ import { StepContext } from '../stepContext';
 
    export function Question4({ onChange, fragen }) {
     const { step } = useContext(StepContext);
-    const [localValue, setLocalValue] = useState(fragen && fragen[step - 1] ? fragen[step - 1] : '');
+    const [localValue, setLocalValue] = useState(fragen && fragen[step - 1] ? fragen[step - 1] : '18');
    
     const handleLocalChange = (event) => {
      const newValue = event.target.value;
@@ -79,7 +79,7 @@ import { StepContext } from '../stepContext';
     
     <h2 className="text-3xl pb-5">Männlich oder weiblich?</h2>
     <label htmlFor="männlich" className="block text-sm font-medium text-gray-700">männlich</label>
-    <input className="border-grey-100 border-solid border-2 rounded-lg" id="männlich" name="Geschlecht" type="radio" value="männlich" checked={fragen}   onChange={onChange}  />
+    <input className="border-grey-100 border-solid border-2 rounded-lg" id="männlich" name="Geschlecht" type="radio" value="männlich" checked={fragen} onChange={onChange}  />
     <label htmlFor="weiblich" className="block text-sm font-medium text-gray-700">weiblich</label>
     <input className="border-grey-100 border-solid border-2 rounded-lg" id="weiblich" name="Geschlecht" type="radio" value="weiblich" checked={fragen} onChange={onChange}  />
     </>
@@ -92,7 +92,7 @@ import { StepContext } from '../stepContext';
     
     <h2 className="text-3xl pb-5">Wieviel wiegst du?</h2>
 
-    <input className="border-grey-100 border-solid border-2 rounded-lg" name="Gewicht" type="number" value={fragen} onChange={onChange}  />
+    <input className="border-grey-100 border-solid border-2 rounded-lg" min="0" name="Gewicht" type="number" value={fragen} onChange={onChange}  />
     </>
     )
    }

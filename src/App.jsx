@@ -14,8 +14,8 @@ function App() {
     
       <>
       <AuthContext.Provider value = {contextValue}>
-    <Homepage />
-    </AuthContext.Provider>
+      <Homepage />
+      </AuthContext.Provider>
       </>
     
   )

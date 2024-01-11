@@ -3,11 +3,15 @@
 @tailwind utilities;
 
 #root {
-  max-width: 1280px;
+
   margin: 0 auto;
 
   text-align: center;
   /* height: 100vh; */
+}
+
+main {
+  background-color: #FDFAFE;
 }
 
 h3 {
@@ -42,6 +46,10 @@ font-size: 12px;
 color: #00BBE4;
 text-decoration: underline;
 
+}
+
+.cssborder {
+border-color: #0066A4;
 }
 /* 
 
