@@ -2,6 +2,8 @@ import { NavLink } from "react-router-dom";
 import { useState, useContext } from "react";
 import { AuthContext } from "../components/authContext";
 
+const API_URL = import.meta.env.VITE_API_URL   
+
 export default function Login () {
 
     
@@ -15,22 +17,26 @@ export default function Login () {
       event.preventDefault();
       
       //const baseURL = "http://localhost:8080/";
-      const baseURL = "";
+      const baseURL = API_URL;
 
       fetch(baseURL + '/authentication/login', {
        method: 'POST',
+       withCredentials: true,
+       credentials: 'include',
        headers: {
          'Content-Type': 'application/json',
        },
        body: JSON.stringify({ username, password }),
       })
       .then(response => {
+        console.log("LoginResponse:",response)
        if (!response.ok) {
          throw new Error(`HTTP error! status: ${response.status}`);
        }
        return response.json();
       })
       .then(data => {
+        console.log("LoginData:",data)
        // Benutzer wurde erfolgreich authentifiziert
        if(data.login_token)
        {
