@@ -1,6 +1,9 @@
-import { NavLink } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
 import { useState, useContext } from "react";
 import { AuthContext } from "../components/authContext";
+
+const API_URL = import.meta.env.VITE_API_URL   
+
 
 export default function Register () {
 
@@ -8,12 +11,13 @@ export default function Register () {
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
     const { authToken, setAuthToken} = useContext(AuthContext)
+    const navigate = useNavigate();
 
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         
-        const baseURL = "http://localhost:8080";
+        const baseURL = API_URL ;
         //const baseURL = "";
   
         fetch(baseURL + '/authentication/register', {
@@ -24,6 +28,7 @@ export default function Register () {
          body: JSON.stringify({ username, email, password }),
         })
         .then(response => {
+          console.log("Response ", response)
          if (!response.ok) {
            throw new Error(`HTTP error! status: ${response.status}`);
          }
@@ -37,7 +42,9 @@ export default function Register () {
           setAuthToken(data.login_token)
          }
          console.log("Success");
-         console.log(data);
+         console.log("Data: ",data);
+         navigate("/login")
+         
          
         })
         .catch(error => {
