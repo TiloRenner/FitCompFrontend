@@ -2,6 +2,8 @@ import { NavLink } from "react-router-dom";
 import { useState, useContext } from "react";
 import { AuthContext } from "../components/authContext";
 
+const API_URL = import.meta.env.VITE_API_URL   
+
 export default function Login () {
 
     
@@ -14,23 +16,27 @@ export default function Login () {
     const handleSubmit = async (event) => {
       event.preventDefault();
       
-      const baseURL = "http://localhost:8080";
-      // const baseURL = "";
+      //const baseURL = "http://localhost:8080/";
+      const baseURL = API_URL;
 
       fetch(baseURL + '/authentication/login' , {
        method: 'POST',
+       withCredentials: true,
+       credentials: 'include',
        headers: {
          'Content-Type': 'application/json',
        },
        body: JSON.stringify({ username, password }),
       })
       .then(response => {
+        console.log("LoginResponse:",response)
        if (!response.ok) {
          throw new Error(`HTTP error! status: ${response.status}`);
        }
        return response.json();
       })
       .then(data => {
+        console.log("LoginData:",data)
        // Benutzer wurde erfolgreich authentifiziert
        if(data.login_token)
        {
@@ -53,7 +59,7 @@ export default function Login () {
     return (
     <>
     <section>
-            <div className="bg-[url('src/images/people.jpg')] flex justify-center items-center h-[700px]">
+            <div className="bg-[url('src/images/people.jpg')] bg-cover flex justify-center items-center h-[700px]">
                     <div className="flex flex-col w-[70%] md:w-[33%] bg-white bg-opacity-80 p-6 rounded-lg">
                     <div className="flex justify-center items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="#00BBE4" class="w-20 h-20">

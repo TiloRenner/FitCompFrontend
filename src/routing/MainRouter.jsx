@@ -21,7 +21,7 @@ import Register from '../pages/register'
 export const router = createBrowserRouter(
     createRoutesFromElements(
         
-        <Route path="/" element={<UserLayout/>}>
+        <Route path="/" element={<MainLayout/>}>
             <Route index element={<Homepage />}/>
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />    
@@ -32,7 +32,6 @@ export const router = createBrowserRouter(
             <Route path="danke" element={<DankeAbfrage />} />
             <Route path="*" element={<NotFoundPage/>}/>
 
-            <Route path="dashboard" element={<DashBoard/>}/>
         </Route>
 
 

@@ -1,16 +1,15 @@
-import { Navigate, useLocation } from 'react-router-dom';
+import { Navigate, Outlet } from "react-router-dom"
+import { UserContext } from "../../layouts/UserLayout";
+import { useContext } from "react"
 
+export default function ProtectedRoute() {
 
+    const {user} = useContext(UserContext)
 
-export default function ProtectedRoute({ children, ...rest }) {
- let location = useLocation();
+    if(user != "authenticated"){
+        return <Navigate to="/login" replace/>
+    }
 
- // Überprüfen Sie hier, ob der Benutzer angemeldet ist
- let isLoggedIn = checkUserAuthentication();
-
- return (
-   <Route {...rest}>
-     {isLoggedIn ? children : <Navigate to="/login" state={{ from: location }} />}
-   </Route>
- );
+    return <Outlet/>
 }
+
