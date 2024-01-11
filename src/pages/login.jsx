@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { useState, useContext } from "react";
 import { AuthContext } from "../components/authContext";
+import { useNavigate } from "react-router-dom";
 
 const API_URL = import.meta.env.VITE_API_URL   
 
@@ -10,6 +11,7 @@ export default function Login () {
     const [username, setName] = useState('');
     const [password, setPassword] = useState('');
     const { authToken, setAuthToken} = useContext(AuthContext)
+    const navigate = useNavigate()
 
 
 
@@ -42,6 +44,7 @@ export default function Login () {
        {
         console.log("Token found :", data.login_token)
         setAuthToken(data.login_token)
+        navigate('/dashboard');
        }
        console.log("Success");
        console.log(data);
