@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 
 
 export default function MainLayout() {
-
+    console.log("Start MainLayout")
     return (
         <div >
             <Header />

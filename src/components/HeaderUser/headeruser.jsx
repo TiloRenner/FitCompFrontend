@@ -4,10 +4,10 @@ import { useContext } from "react";
 import { useState } from 'react';
 import { UserContext } from "../../layouts/UserLayout";
 
-const {user}=useContext(UserContext)
+
 
 export default function HeaderUser(){ 
-    
+    const {user}=useContext(UserContext)
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleMenu = () => {
