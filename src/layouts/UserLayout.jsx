@@ -10,6 +10,7 @@ import { UserContext } from '../components/userContext';
 
 export default function UserLayout() {
 
+  console.log("Start UserLayout")
   const [user, setUser] = useState("authenticated")
 
   return (
