@@ -9,7 +9,7 @@ const API_URL = import.meta.env.VITE_API_URL
 export default function Abfrage () {
 
   // States
-  
+    const [ question, setQuestion ] = useState ()
     const [ fragen, setFragen ] = useState ([])
     const [ step, setStep ] = useState (1)
     const [ progress, setProgress ] = useState(0);
@@ -18,15 +18,16 @@ export default function Abfrage () {
     const baseURL = API_URL;
   // Daten loggen in der Console
 
-    console.log (fragen)
-    console.log (progress)
+    console.log ("question Array State: " , question)
+    console.log ("Fragen Array State: " , fragen)
+    console.log ("Progress State:", progress)
 
  
   //  Validierung der Eingabewerte
 
     function validateForm() {
       let isValid = true;
-      console.log (fragen[step - 1])
+      console.log ("Fragen Step-1", fragen[step - 1])
       const currentQuestion = fragen[step - 1];
      
       if (currentQuestion === undefined || currentQuestion === '' || currentQuestion === null) {
@@ -128,7 +129,7 @@ export default function Abfrage () {
       //       console.error("Fehler beim Senden der Daten: ", e);
       //   }
       //   };
-      const [ question, setQuestion ] = useState ()
+
 
       useEffect(() => {
         const fetchData = async () => {
@@ -145,9 +146,9 @@ export default function Abfrage () {
         }
       
         const data = await response.json();
-        console.log(data);
+        console.log("data von fetch:", data);
         // console.log("array", Array.isArray(data.results));
-        setQuestion(data.results);
+        setQuestion(data.questions);
         
       
       } catch (error) { 
