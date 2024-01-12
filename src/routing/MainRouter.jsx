@@ -36,7 +36,9 @@ export const router = createBrowserRouter(
             <Route path='/' element={<UserLayout />} />
 
             <Route element={<ProtectedRoute user="hallo" />} >
-                <Route path="dashboard" element={<DashBoard />} />
+                <Route path="dashboard"  element={<UserLayout/>}>
+                <Route index element={<DashBoard />} />
+                </Route>
             </Route>
 
         </Route>
