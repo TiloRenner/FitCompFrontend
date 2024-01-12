@@ -1,12 +1,14 @@
 import React from 'react';
 import FooterUser from '../components/FooterUser';
 import HeaderUser from '../components/HeaderUser/headeruser';
-import { createContext, useState } from 'react';
+import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 
-export const UserContext = createContext(null);
+import { UserContext } from '../components/userContext';
 
-export default function UserLayout({children}) {
+
+
+export default function UserLayout() {
 
   const [user, setUser] = useState("authenticated")
 

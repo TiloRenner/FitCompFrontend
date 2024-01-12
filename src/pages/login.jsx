@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import { useState, useContext } from "react";
 import { AuthContext } from "../components/authContext";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../components/userContext";
 
 const API_URL = import.meta.env.VITE_API_URL   
 
@@ -13,7 +14,9 @@ export default function Login () {
     const { authToken, setAuthToken} = useContext(AuthContext)
     const navigate = useNavigate()
 
+    // const { user, setUser } = useContext(UserContext);
 
+    // console.log(login_token)
 
     const handleSubmit = async (event) => {
       event.preventDefault();
@@ -44,8 +47,8 @@ export default function Login () {
        {
         console.log("Token found :", data.login_token)
         setAuthToken(data.login_token)
-        navigate('/dashboard');
        }
+       navigate('/dashboard');
        console.log("Success");
        console.log(data);
        

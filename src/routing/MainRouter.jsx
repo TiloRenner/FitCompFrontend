@@ -10,8 +10,8 @@ import NotFoundPage from '../components/NotFoundPage';
 import Abfrage from '../pages/abfrage';
 import DankeAbfrage from '../pages/dankeabfrage';
 import ResultAbfrage from '../pages/resultabfrage';
-import Register from '../pages/register'
-
+import Register from '../pages/register';
+import ProtectedRoute from '../components/ProtectedRoutes';
 
 
 
@@ -30,8 +30,16 @@ export const router = createBrowserRouter(
             <Route path="abfrage" element={<Abfrage />} />
             <Route path="result" element={<ResultAbfrage />} />
             <Route path="danke" element={<DankeAbfrage />} />
-            <Route path="*" element={<NotFoundPage/>}/>
 
+            <Route path="/nutzerprofil" element={<UserLayout />}/>
+
+            <Route element={<ProtectedRoute user="hallo" />} >
+                <Route path="dashboard" element={<UserLayout />} >
+                            <Route index element={<DashBoard />} />
+                </Route>
+                </Route>
+            <Route path="*" element={<NotFoundPage/>}/>
+           
         </Route>
 
 

@@ -2,9 +2,10 @@ import {NavLink} from 'react-router-dom';
 import logo from "../../images/iconv2_capri.png"
 import { useContext } from "react";
 import { useState } from 'react';
-import { UserContext } from "../../layouts/UserLayout";
+import { UserContext } from '../userContext';
 
-const {user}=useContext(UserContext)
+
+
 
 export default function HeaderUser(){ 
     
