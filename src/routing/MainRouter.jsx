@@ -1,6 +1,7 @@
 import {createBrowserRouter, createRoutesFromElements, Route, Routes} from 'react-router-dom';
 import MainLayout from '../layouts/MainLayout';
 import UserLayout from '../layouts/UserLayout';
+import { Layout } from '../layouts/MainLayout';
 import DashBoard from '../pages/dashboard';
 import Homepage from '../pages/homepage';
 import AboutUs from '../pages/aboutus';
@@ -31,11 +32,12 @@ export const router = createBrowserRouter(
             <Route path="result" element={<ResultAbfrage />} />
             <Route path="danke" element={<DankeAbfrage />} />
 
-            <Route path="/nutzerprofil" element={<UserLayout />}/>
+            {/* <Route path="/" element={<UserLayout />}/> */}
 
             <Route element={<ProtectedRoute user="hallo" />} >
                 <Route path="dashboard" element={<UserLayout />} >
                             <Route index element={<DashBoard />} />
+                            {/* <Route path="dashboard" element={<DashBoard />} /> */}
                 </Route>
                 </Route>
             <Route path="*" element={<NotFoundPage/>}/>

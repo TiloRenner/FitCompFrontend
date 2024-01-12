@@ -4,7 +4,7 @@ import { ProgressBar } from "../components/ProgressBar";
 import { useNavigate } from "react-router-dom";
 import { StepContext } from "../components/stepContext";
 
-
+const API_URL = import.meta.env.VITE_API_URL   
 
 export default function Abfrage () {
 
@@ -15,7 +15,7 @@ export default function Abfrage () {
     const [ progress, setProgress ] = useState(0);
     const navigate = useNavigate();
 
-
+    const baseURL = API_URL;
   // Daten loggen in der Console
 
     console.log (fragen)
@@ -128,7 +128,44 @@ export default function Abfrage () {
       //       console.error("Fehler beim Senden der Daten: ", e);
       //   }
       //   };
+      const [ question, setQuestion ] = useState ()
 
+      useEffect(() => {
+        const fetchData = async () => {
+        // setIsLoading(true);
+      
+        const baseURL = API_URL + '/assessment/questions' ;
+      
+            
+      try {
+      
+        const response = await fetch(`${baseURL}`)
+        if (!response.ok) {
+        throw new Error('Network response was not ok');
+        }
+      
+        const data = await response.json();
+        console.log(data);
+        // console.log("array", Array.isArray(data.results));
+        setQuestion(data.results);
+        
+      
+      } catch (error) { 
+        console.error ('There has been a problem with your fetch operation: ', error);
+      } finally {
+        //  setIsLoading(false);
+        }
+      };
+      fetchData();
+      }, []);
+
+      let frage;
+      if (question !== undefined && Array.isArray(question)) {
+       frage = question.map(q => q.questionTextGerman);
+      }
+
+      // const frage = question.map(q => q.questionTextGerman)
+      console.log('frage',frage)
 
     return (
       
@@ -141,9 +178,19 @@ export default function Abfrage () {
 
               <div>
                 
-                  {step === 1 && <Question1 onChange={handleChange} value={fragen}  />}
+                  {step === 1 && <Question1 Question001={frage} onChange={handleChange} value={fragen}  />}
+                  {/* {step === 1 &&  question.map((q) => (
+                  <Question1
+                    
+                    Question001={q[0].questionTextGerman}
+                    onChange={handleChange}
+                    value={fragen}
+                    />
+                   ))} */}
+                  
                   {step === 2 && <Question2 onChange={handleChange} value={fragen}  />}   
                   {step === 3 && <Question3 onChange={handleChange} value={fragen}  />}  
+
                   <StepContext.Provider value={{ step, setStep }}>
 
                   {step === 4 && <Question4 onChange={handleChange} value={fragen}  />} 

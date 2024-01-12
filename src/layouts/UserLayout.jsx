@@ -10,15 +10,15 @@ import { UserContext } from '../components/userContext';
 
 export default function UserLayout() {
 
-  const [user, setUser] = useState("authenticated")
+  
 
   return (
-        <UserContext.Provider value={{ user, setUser }} >
+        <>
         <HeaderUser  />
         <main className='h-screen'>
         <Outlet />
         </main>
         <FooterUser  />
-        </UserContext.Provider>
+        </>
   )
 }
