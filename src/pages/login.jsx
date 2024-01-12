@@ -15,6 +15,7 @@ export default function Login () {
 
     const handleSubmit = async (event) => {
       event.preventDefault();
+      console.log("LoginStart")
       
       //const baseURL = "http://localhost:8080/";
       const baseURL = API_URL;
