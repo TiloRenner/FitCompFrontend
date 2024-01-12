@@ -8,6 +8,7 @@ export const UserContext = createContext(null);
 
 export default function UserLayout({children}) {
 
+  console.log("Start UserLayout")
   const [user, setUser] = useState("authenticated")
 
   return (
