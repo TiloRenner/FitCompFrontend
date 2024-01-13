@@ -3,9 +3,9 @@ import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 //import Slider from "./abfrageSlider"
 import Slider from "../components/Fragen/abfrageSlider"
+import { ProgressBar } from "../components/ProgressBar";
+
 const API_URL = import.meta.env.VITE_API_URL
-
-
 
 export default function Assessment({}){
 
@@ -14,17 +14,9 @@ export default function Assessment({}){
     const [answeredQuestions,setAnsweredQuestions] = useState([])
     const {category: categoryParam} = useParams();
     const {step: stepParam} = useParams();
-    const [needValueReset,setNeedValueReset] = useState(false)
-
-    
-
-    
-
+    //const [needValueReset,setNeedValueReset] = useState(false)
+    const [ progress, setProgress ] = useState(0);
     const nextStep = Number(stepParam)+1
-
-
-    
-
     const questions = useLoaderData()
 
     //console.log("Answered Questions State:", answeredQuestions)
@@ -48,32 +40,33 @@ export default function Assessment({}){
 
     },[]
     )
+
+    console.log ("Progress State:", progress)
     
-
-
     //console.log("PageDataB - state:", currentCategory, " Category: ", categoryParam," Step: ", stepParam)
-
 
     //let displayCont = buildPage([1,1,1,2])
     //console.log("Content:", questions)
-
         
     function gotoNextPage(value)
     {
+
         const currentQuestionId = questions.questions[stepParam-1].questionId;
-        console.log("ID:", currentQuestionId)
+        const currentQuestion = questions.questions[stepParam-1];
+        console.log("ID:", currentQuestionId, "CurrentQuestion GotoNExt: ", currentQuestion)
         const newAnsweredQuestions = setCurrentAnswer(value,currentQuestionId,answeredQuestions)
         setAnsweredQuestions(newAnsweredQuestions)
-        setNeedValueReset(true)
+        //setNeedValueReset(true)
 
         //check if next step is already done, if so skip
         
-
+        setProgress((prevProgress) => prevProgress + (100 / (questions.questions.length)));
         navigate("/assessment/" + categoryParam + "/" + (nextStep))
     }
 
     function gotoPage(pagenum)
     {
+        setProgress((100 / questions.questions.length * (pagenum-1)));
         navigate("/assessment/" + categoryParam + "/" + (pagenum))
     }
 
@@ -85,13 +78,10 @@ export default function Assessment({}){
         {
             category:currentCategory,
             answers: answeredQuestions
-
-
         }
 
         const fetchAdjustedProduct = async ()=>
           {
-
             console.log("Try Fetch Product")
             try{
               const response = await fetch(API_URL + "/assessment/adjustedProduct",{
@@ -113,8 +103,6 @@ export default function Assessment({}){
           };
 
         fetchAdjustedProduct();
-
-
     }
 
     if(stepParam > questions.steps)
@@ -126,29 +114,25 @@ export default function Assessment({}){
     else
     {
         //Check if already anwered, if not set Default Value for Question
-
         console.log("AnsweredQuestions: ", answeredQuestions)
         console.log("QuestionID: ", questions.questions[stepParam-1].questionId)
-
         //var resetValue = questions.questions[stepParam-1].answers[0];
         //console.log(questions.questions[stepParam-1])
-
-
         const matchingAnswered = answeredQuestions.find((aq) => 
             {
                 return aq.questionId == questions.questions[stepParam-1].questionId
             })
 
         console.log("MatchingAnswered:", matchingAnswered)
-
-
         return <>
+                <div className="mt-20 w-">
+                  <ProgressBar progress={progress}   />
+                  </div>
         <h2>{questions.questions[stepParam-1].questionTextGerman}</h2>
         <div>{buildQuestionLayout(questions.questions[stepParam-1],gotoNextPage,matchingAnswered)}</div>
     <br></br>
     </>
     }
-
 }
 
 function isPageValid()
@@ -161,8 +145,6 @@ function isPageValid()
     {
         return false;
     }
-
-
 }
 
 function setCurrentAnswer(value,pageQuestionId,oldAnsweredQuestions)
@@ -170,8 +152,6 @@ function setCurrentAnswer(value,pageQuestionId,oldAnsweredQuestions)
     //const navigate = useNavigate()
     console.log("ButtonValue:", value)
     //todo check answeredQuestions if answer exists for Q-ID
-
-    
 
     if (oldAnsweredQuestions)
     {
@@ -186,17 +166,10 @@ function setCurrentAnswer(value,pageQuestionId,oldAnsweredQuestions)
 
         //setAnsweredQuestions(newAnsweredQuestions);
         return newAnsweredQuestions;
-
     }
 
     return null
-
-    
-
-    
-
 }
-
 
 function buildQuestionLayout(question,gotoNextPage,matchingAnswered){
     //console.log("Question to build from" , question)
@@ -227,18 +200,11 @@ function buildQuestionLayout(question,gotoNextPage,matchingAnswered){
 
         console.log("KEY:",question.questionId )
         return <Slider key={question.questionId} question={question} gotoNextPage = {gotoNextPage} resetValue={resetValue}/>
-
     }
-
 }
-
-
-
 
 function AssessmentOverview({questions,answers,gotoPage,sendAssessmentAnswers})
 {
-
-
 
     console.log("AssQuestions:", questions, " AssAnswers: ",answers)
     const questionsDisplay = questions.map((question,index) =>
@@ -268,8 +234,6 @@ function AssessmentOverview({questions,answers,gotoPage,sendAssessmentAnswers})
         </div>
         }
 
-        
-
     })
     console.log(questionsDisplay)
 
@@ -278,31 +242,8 @@ function AssessmentOverview({questions,answers,gotoPage,sendAssessmentAnswers})
         {questionsDisplay}
         <button onClick={(e)=> { sendAssessmentAnswers()}}>Send</button>
 
-
-
     </div>
 
-}
-
-
-
-function buildPage(array)
-{
-    console.log("Array", array)
-    const result = array.map((element) => {
-        if(element == 1)
-        {
-            return <p> Paragraph1</p>
-        }
-        else
-        {
-            return <button>Button</button>
-        }
-    }
-
-    )
-
-    return result;
 }
 
 export const assessmentLoader = async()=>
