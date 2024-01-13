@@ -6,9 +6,8 @@ import { UserContext } from '../userContext';
 
 
 
-
 export default function HeaderUser(){ 
-    
+    const {user}=useContext(UserContext)
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleMenu = () => {
