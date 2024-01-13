@@ -1,18 +1,20 @@
 import { redirect,useLoaderData, useNavigate} from "react-router-dom"
 import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
+import Slider from "./abfrageSlider"
 
 const API_URL = import.meta.env.VITE_API_URL
 
 
 
-export default function AbfrageTest({abfrage}){
+export default function AbfrageTest({}){
 
     const navigate = useNavigate()
     const [currentCategory,setCurrentCategory] = useState()
     const [answeredQuestions,setAnsweredQuestions] = useState([])
     const {category: categoryParam} = useParams();
     const {step: stepParam} = useParams();
+    const [needValueReset,setNeedValueReset] = useState(false)
 
     
 
@@ -25,8 +27,8 @@ export default function AbfrageTest({abfrage}){
 
     const questions = useLoaderData()
 
-    console.log("QState:", answeredQuestions)
-    console.log("PageDataA - state:", currentCategory, " Category: ", categoryParam," Step: ", stepParam)
+    //console.log("Answered Questions State:", answeredQuestions)
+    //console.log("PageDataA - state:", currentCategory, " Category: ", categoryParam," Step: ", stepParam)
 
 //Todo Move State to App
    useEffect(()=>{
@@ -49,11 +51,11 @@ export default function AbfrageTest({abfrage}){
     
 
 
-    console.log("PageDataB - state:", currentCategory, " Category: ", categoryParam," Step: ", stepParam)
+    //console.log("PageDataB - state:", currentCategory, " Category: ", categoryParam," Step: ", stepParam)
 
 
     //let displayCont = buildPage([1,1,1,2])
-    console.log("Content:", questions)
+    //console.log("Content:", questions)
 
         
     function gotoNextPage(value)
@@ -62,6 +64,7 @@ export default function AbfrageTest({abfrage}){
         console.log("ID:", currentQuestionId)
         const newAnsweredQuestions = setCurrentAnswer(value,currentQuestionId,answeredQuestions)
         setAnsweredQuestions(newAnsweredQuestions)
+        setNeedValueReset(true)
 
         //check if next step is already done, if so skip
         
@@ -91,7 +94,7 @@ export default function AbfrageTest({abfrage}){
 
             console.log("Try Fetch Product")
             try{
-              const response = await fetch(API_URL + "/getadjustedproduct",{
+              const response = await fetch(API_URL + "/assessment/adjustedProduct",{
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
@@ -122,9 +125,26 @@ export default function AbfrageTest({abfrage}){
     }
     else
     {
+        //Check if already anwered, if not set Default Value for Question
+
+        console.log("AnsweredQuestions: ", answeredQuestions)
+        console.log("QuestionID: ", questions.questions[stepParam-1].questionId)
+
+        //var resetValue = questions.questions[stepParam-1].answers[0];
+        //console.log(questions.questions[stepParam-1])
+
+
+        const matchingAnswered = answeredQuestions.find((aq) => 
+            {
+                return aq.questionId == questions.questions[stepParam-1].questionId
+            })
+
+        console.log("MatchingAnswered:", matchingAnswered)
+
+
         return <>
         <h2>{questions.questions[stepParam-1].questionTextGerman}</h2>
-        <div>{buildQuestionLayout(questions.questions[stepParam-1],gotoNextPage)}</div>
+        <div>{buildQuestionLayout(questions.questions[stepParam-1],gotoNextPage,matchingAnswered)}</div>
     <br></br>
     </>
     }
@@ -178,8 +198,8 @@ function setCurrentAnswer(value,pageQuestionId,oldAnsweredQuestions)
 }
 
 
-function buildQuestionLayout(question,gotoNextPage){
-    console.log("Question to build from" , question)
+function buildQuestionLayout(question,gotoNextPage,matchingAnswered){
+    //console.log("Question to build from" , question)
 
     if(question.answerType == "fixed")
     {
@@ -192,29 +212,27 @@ function buildQuestionLayout(question,gotoNextPage){
     }
     else if(question.answerType == "slider")
     {
-        return <Slider question={question} gotoNextPage = {gotoNextPage}/>
+        //if(!resetValue)
+        //{
+            //resetValue = question.answers[0].valueDefault
+        //}
+        var resetValue = question.answers[0].valueDefault
+        console.log(question)
+        console.log("FirstResetValue:", resetValue)
+        if(matchingAnswered)
+        {
+            resetValue = matchingAnswered.valueEntered
+        }
+        console.log("SecondResetValue:", resetValue)
+
+        console.log("KEY:",question.questionId )
+        return <Slider key={question.questionId} question={question} gotoNextPage = {gotoNextPage} resetValue={resetValue}/>
 
     }
 
 }
 
-function Slider({question,gotoNextPage})
-{
-    const [sliderValue,setSilderValue] = useState(50)
 
-    function sendValue(e)
-    {
-        console.log("setValue:", sliderValue)
-        gotoNextPage(sliderValue)
-    }
-
-
-    return <div className="slidecontainer">
-    <input type="range" min={question.answers[0].valueMin} max={question.answers[0].valueMax} value={sliderValue} defaultValue="50" className="slider" id="myRange" onChange={(e) => setSilderValue(e.target.value)}></input><p>{sliderValue} {question.answers[0].aTextGerman}</p>
-    <button onClick={sendValue}>Weiter</button>
-  </div>
-
-}
 
 
 function AssessmentOverview({questions,answers,gotoPage,sendAssessmentAnswers})
