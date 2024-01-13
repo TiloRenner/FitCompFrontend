@@ -1,11 +1,14 @@
 import React, { useContext, useState } from 'react';
 import { StepContext } from '../stepContext';
 
-    export function Question1({ onChange, fragen }) {
+
+
+
+    export function Question1({ onChange, fragen, Question001}) {
         return (
         <>
         
-        <h2 className="text-3xl pb-5">Wie heißt du?</h2>
+        <h2 className="text-3xl pb-5">{Question001}</h2>
 
         <input className="border-grey-100 border-solid border-2 rounded-lg" name="name" type="text" value={fragen} onChange={onChange} />
         </>

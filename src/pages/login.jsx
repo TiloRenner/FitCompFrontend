@@ -2,6 +2,9 @@ import { NavLink } from "react-router-dom";
 import { useState, useContext } from "react";
 import { AuthContext } from "../components/authContext";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../components/userContext";
+
+
 
 const API_URL = import.meta.env.VITE_API_URL   
 
@@ -11,9 +14,75 @@ export default function Login () {
     const [username, setName] = useState('');
     const [password, setPassword] = useState('');
     const { authToken, setAuthToken} = useContext(AuthContext)
+   
+
+    // const { user, setUser } = useContext(UserContext);
+
+    // console.log(userId)
+
     const navigate = useNavigate()
 
-
+    // const handleSubmit = async (event) => {
+    //   event.preventDefault();
+      
+    //   const baseURL = API_URL;
+     
+    //   try {
+    //     const response = await fetch(baseURL + '/authentication/login', {
+    //       method: 'POST',
+    //       withCredentials: true,
+    //       credentials: 'include',
+    //       headers: {
+    //         'Content-Type': 'application/json',
+    //       },
+    //       body: JSON.stringify({ username, password }),
+    //     });
+     
+    //     if (!response.ok) {
+    //       throw new Error(`HTTP error! status: ${response.status}`);
+    //     }
+     
+    //     const data = await response.json();
+     
+    //     if(data.login_token) {
+    //       console.log("Token found :", data.login_token)
+    //       setAuthToken(data.login_token)
+     
+    //       // Fetch the session data
+    //       const sessionResponse = await fetch(baseURL + '/authentication/login', {
+    //         method: 'GET',
+    //         withCredentials: true,
+    //         credentials: 'include',
+    //       });
+     
+    //       if (!sessionResponse.ok) {
+    //         throw new Error(`HTTP error! status: ${sessionResponse.status}`);
+    //       }
+     
+    //       const sessionData = await sessionResponse.json();
+     
+    //       // Now you can use the session data for authentication
+    //       // For example, you could store it in your AuthContext
+    //       const { setUserDetails } = useContext(AuthContext);
+          
+    //       setUserDetails({
+    //         isAuth: sessionData.isAuth,
+    //         userId: sessionData.userId,
+    //         role: sessionData.role
+            
+    //       });
+     
+    //       navigate('/impressum');
+    //     }
+    //     // console.log(isAuth)
+    //     console.log("Success");
+    //     console.log(data);
+    //   } catch (error) {
+    //     console.log("Error");
+    //     console.log(error);
+    //   }
+    //  };
+     
 
     const handleSubmit = async (event) => {
       event.preventDefault();
@@ -44,10 +113,11 @@ export default function Login () {
        {
         console.log("Token found :", data.login_token)
         setAuthToken(data.login_token)
-        navigate('/dashboard');
        }
+       
        console.log("Success");
        console.log(data);
+       navigate('/dashboard');
        
       })
       .catch(error => {

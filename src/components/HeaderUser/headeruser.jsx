@@ -2,7 +2,9 @@ import {NavLink} from 'react-router-dom';
 import logo from "../../images/iconv2_capri.png"
 import { useContext } from "react";
 import { useState } from 'react';
-import { UserContext } from "../../layouts/UserLayout";
+import { UserContext } from '../userContext';
+
+
 
 
 
@@ -19,7 +21,7 @@ export default function HeaderUser(){
     return (
         <header>
 
-    {user === "authenticated" ?
+  
 
                 <nav className={`flex flex-col text-white p-4 lg:fixed lg:top-0 lg:left-0 lg:h-full lg:overflow-hidden lg:transition-all lg:duration-200 lg:ease-in-out lg:transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} translate-x-0 lg:static lg:overflow-visible`}>
  
@@ -75,7 +77,7 @@ export default function HeaderUser(){
                 </div>
             </nav>
 
-            : null}
+         
             
        </header>
     )
