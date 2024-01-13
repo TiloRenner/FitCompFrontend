@@ -8,11 +8,9 @@ import { UserContext } from '../components/userContext';
 
 
 
-
 export default function UserLayout() {
 
   
-
 
   return (
         <>
