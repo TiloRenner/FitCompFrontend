@@ -9,7 +9,7 @@ const API_URL = import.meta.env.VITE_API_URL
 export default function Abfrage () {
 
   // States
-  
+    const [ question, setQuestion ] = useState ([])
     const [ fragen, setFragen ] = useState ([])
     const [ step, setStep ] = useState (1)
     const [ progress, setProgress ] = useState(0);
@@ -18,15 +18,16 @@ export default function Abfrage () {
     const baseURL = API_URL;
   // Daten loggen in der Console
 
-    console.log (fragen)
-    console.log (progress)
+    console.log ("question Array State: " , question)
+    console.log ("Fragen Array State: " , fragen)
+    console.log ("Progress State:", progress)
 
  
   //  Validierung der Eingabewerte
 
     function validateForm() {
       let isValid = true;
-      console.log (fragen[step - 1])
+      console.log ("Fragen Step-1", fragen[step - 1])
       const currentQuestion = fragen[step - 1];
      
       if (currentQuestion === undefined || currentQuestion === '' || currentQuestion === null) {
@@ -128,7 +129,8 @@ export default function Abfrage () {
       //       console.error("Fehler beim Senden der Daten: ", e);
       //   }
       //   };
-      const [ question, setQuestion ] = useState ()
+
+      //  Fetch Get Questions
 
       useEffect(() => {
         const fetchData = async () => {
@@ -145,9 +147,9 @@ export default function Abfrage () {
         }
       
         const data = await response.json();
-        console.log(data);
+        console.log("data von fetch:", data);
         // console.log("array", Array.isArray(data.results));
-        setQuestion(data.results);
+        setQuestion(data.questions);
         
       
       } catch (error) { 
@@ -159,13 +161,16 @@ export default function Abfrage () {
       fetchData();
       }, []);
 
-      let frage;
-      if (question !== undefined && Array.isArray(question)) {
-       frage = question.map(q => q.questionTextGerman);
-      }
 
-      // const frage = question.map(q => q.questionTextGerman)
-      console.log('frage',frage)
+      const frage = question.map(question => {
+        return {
+            id: question.questionId,
+            text: question.questionTextGerman
+        };
+      });
+  
+
+      console.log('frage', frage)
 
     return (
       
@@ -177,8 +182,22 @@ export default function Abfrage () {
         <div className="h-full justify-center items-center flex ">
 
               <div>
-                
-                  {step === 1 && <Question1 Question001={frage} onChange={handleChange} value={fragen}  />}
+              {frage.map((question, index) => (
+                            step === index + 1  && 
+                            <div>
+              <h2 key={question.id} className="text-3xl pb-5">{question.text}</h2>
+
+              <input className="border-grey-100 border-solid border-2 rounded-lg" name="name" type="text" value={fragen.text} onChange={handleChange} /></div>
+              ))}
+              {/* {question.map((question, index) => (
+                            step === index + 1 && <div>
+                            key={question.id} 
+                            Question001={question.text} 
+                            onChange={handleChange} 
+                            value={fragen} 
+                          
+                          ))} */}
+                  {/* {step === 1 && <Question1 Question001={frage} onChange={handleChange} value={fragen}  />} */}
                   {/* {step === 1 &&  question.map((q) => (
                   <Question1
                     
@@ -188,7 +207,7 @@ export default function Abfrage () {
                     />
                    ))} */}
                   
-                  {step === 2 && <Question2 onChange={handleChange} value={fragen}  />}   
+                  {/* {step === 2 && <Question2 onChange={handleChange} value={fragen}  />}   
                   {step === 3 && <Question3 onChange={handleChange} value={fragen}  />}  
 
                   <StepContext.Provider value={{ step, setStep }}>
@@ -201,7 +220,7 @@ export default function Abfrage () {
                   {step === 8 && <Question8 onChange={handleChange} value={fragen}  />}  
                   {step === 9 && <Question9 onChange={handleChange} value={fragen}  />}  
                   {step === 10 && <Question10 onChange={handleChange} value={fragen}  />}  
-                  {step === 11 && <Question11 onChange={handleChange} value={fragen}  />}   
+                  {step === 11 && <Question11 onChange={handleChange} value={fragen}  />}    */}
                   
                   <div>
                       <div className="pt-5"> 
