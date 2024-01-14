@@ -246,11 +246,17 @@ function AssessmentOverview({questions,answers,gotoPage,sendAssessmentAnswers})
 
 }
 
-export const assessmentLoader = async()=>
+export const assessmentLoader = async({params})=>
 {
+
+    console.log("LoaderParams: " ,params)
+
+    const {category} = params;
+    console.log("LoaderCategory: " , category)
+
     try{
         console.log("Try Fetch for Assessment")
-        const res = await fetch(API_URL+ '/assessment/questions')
+        const res = await fetch(API_URL+ '/assessment/questions?' + new URLSearchParams({category:category}))
         console.log("Response: ", res)
         return res.json()
     }
