@@ -14,10 +14,10 @@ export default function DashBoard () {
             try{
               const response = await fetch(API_URL + "/assessment/adjustedProduct",{
                 method: 'POST',
+                withCredentials: true,
+                credentials: 'include',
                 headers: {
                   'Content-Type': 'application/json',
-                  withCredentials: true,
-                credentials: 'include',
                 },
                 body: JSON.stringify(assessmentDataFromLocalStorage),
                });
