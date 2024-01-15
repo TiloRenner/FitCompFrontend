@@ -8,7 +8,7 @@ import { UserContext } from '../userContext';
 
 export default function HeaderUser(){ 
     // const {user}=useContext(UserContext)
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(true);
 
     const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -59,7 +59,7 @@ export default function HeaderUser(){
                     <NavLink to="/dashboard" className="text-lg">
                     Dashboard
                     </NavLink>
-                    <NavLink to="/trainingsplan" className="text-lg">
+                    <NavLink to="/dashboard/trainingsplan" className="text-lg">
                     Trainingsplan
                     </NavLink>
                     <NavLink to="/trainingsplan" className="text-lg">
