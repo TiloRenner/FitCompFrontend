@@ -19,9 +19,12 @@ import { AuthContext } from "../authContext";
 
 
 export default function ProtectedRoute() {
- const { isAuth } = useContext(AuthContext);
+// const sid = sessionStorage.getItem('fitcomp.sid') 
+// console.log(sid)
 
- if (!isAuth) {
+const loginState = sessionStorage.getItem("userLoggedIn")
+
+ if (!loginState) {
    return <Navigate to="/login" replace />;
  }
 
