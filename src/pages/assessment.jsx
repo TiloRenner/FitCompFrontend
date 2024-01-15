@@ -72,37 +72,39 @@ export default function Assessment({}){
 
     function sendAssessmentAnswers()
     {
-        console.log("send answers")
+        localStorage.setItem('assessmentData', JSON.stringify(answeredQuestions));
 
-        const assesmentDataToSend = 
-        {
-            category:currentCategory,
-            answers: answeredQuestions
-        }
+        // console.log("send answers")
 
-        const fetchAdjustedProduct = async ()=>
-          {
-            console.log("Try Fetch Product")
-            try{
-              const response = await fetch(API_URL + "/assessment/adjustedProduct",{
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(assesmentDataToSend),
-               });
+        // const assesmentDataToSend = 
+        // {
+        //     category:currentCategory,
+        //     answers: answeredQuestions
+        // }
 
-               const data = await response.json()
-               console.log("ProductData: ", data)
-            }
-            catch(err)
-            {
-              console.error ('There has been a problem with your fetch operation: ', err.message);
-            }
+        // const fetchAdjustedProduct = async ()=>
+        //   {
+        //     console.log("Try Fetch Product")
+        //     try{
+        //       const response = await fetch(API_URL + "/assessment/adjustedProduct",{
+        //         method: 'POST',
+        //         headers: {
+        //           'Content-Type': 'application/json',
+        //         },
+        //         body: JSON.stringify(assesmentDataToSend),
+        //        });
 
-          };
+        //        const data = await response.json()
+        //        console.log("ProductData: ", data)
+        //     }
+        //     catch(err)
+        //     {
+        //       console.error ('There has been a problem with your fetch operation: ', err.message);
+        //     }
 
-        fetchAdjustedProduct();
+        //   };
+
+        // fetchAdjustedProduct();
     }
 
     if(stepParam > questions.steps)
@@ -125,11 +127,13 @@ export default function Assessment({}){
 
         console.log("MatchingAnswered:", matchingAnswered)
         return <>
-                <div className="mt-20 w-">
+            <div className="flex flex-col items-center h-dvh">
+                <div className="mt-20 w-[90%] ">
                   <ProgressBar progress={progress}   />
                   </div>
-        <h2>{questions.questions[stepParam-1].questionTextGerman}</h2>
-        <div>{buildQuestionLayout(questions.questions[stepParam-1],gotoNextPage,matchingAnswered)}</div>
+        <h2 className="text-3xl py-10 mt-10 lg:mt-60">{questions.questions[stepParam-1].questionTextGerman}</h2>
+        <button className="text-lg ">{buildQuestionLayout(questions.questions[stepParam-1],gotoNextPage,matchingAnswered)}</button>
+        </div>
     <br></br>
     </>
     }
@@ -178,7 +182,7 @@ function buildQuestionLayout(question,gotoNextPage,matchingAnswered){
     {
         const displayAnswers = question.answers.map((element,index) => 
         {
-            return <button value = {element.value} onClick={(e)=> { gotoNextPage(e.target.value)}} key={index}>{element.aTextGerman}</button>
+            return <button className="" value = {element.value} onClick={(e)=> { gotoNextPage(e.target.value)}} key={index}>{element.aTextGerman}</button>
         }
         )
         return displayAnswers;
@@ -199,7 +203,11 @@ function buildQuestionLayout(question,gotoNextPage,matchingAnswered){
         console.log("SecondResetValue:", resetValue)
 
         console.log("KEY:",question.questionId )
-        return <Slider key={question.questionId} question={question} gotoNextPage = {gotoNextPage} resetValue={resetValue}/>
+        return (
+        
+        <Slider key={question.questionId} question={question} gotoNextPage = {gotoNextPage} resetValue={resetValue}/>
+      
+        )
     }
 }
 
@@ -217,18 +225,19 @@ function AssessmentOverview({questions,answers,gotoPage,sendAssessmentAnswers})
         {
 
             console.log(question.questionTextGerman)
-            return <div key={index}>
-                <h3>{question.questionTextGerman}</h3>
-                <p>{matchingAnswer.valueEntered}</p>
-                <button onClick={(e)=> { gotoPage(index+1)}}>Change</button>
-                <br></br>
+            return <div className="" key={index}>
+                <div className="flex flex-col justify-center items-center space-y-6">
+                <h3 className="text-xl">{question.questionTextGerman}</h3>
+                <p className="text-3xl text-gray-400">{matchingAnswer.valueEntered}</p>
+                <button className="border-2 text-blue-500 border-blue-500 active:bg-blue-500 hover:bg-blue-500 hover:text-white text-lg px-4 py-2 mt-20" onClick={(e)=> { gotoPage(index+1)}}>Change</button>
+                </div>
             </div>
         }
         else
         {
 
             return <div>
-            <h1>{question.questionTextGerman}</h1>
+            <h1 className="text-xl">{question.questionTextGerman}</h1>
             <p>No value</p>
             <br></br>
         </div>
@@ -237,10 +246,10 @@ function AssessmentOverview({questions,answers,gotoPage,sendAssessmentAnswers})
     })
     console.log(questionsDisplay)
 
-    return <div>
-        <h2>Overview</h2>
+    return <div className="flex flex-col justify-center items-center h-dvh space-y-8">
+        <h2 className="text-5xl">Overview</h2>
         {questionsDisplay}
-        <button onClick={(e)=> { sendAssessmentAnswers()}}>Send</button>
+        <button className="callbtn" onClick={(e)=> { sendAssessmentAnswers()}}>Send</button>
 
     </div>
 

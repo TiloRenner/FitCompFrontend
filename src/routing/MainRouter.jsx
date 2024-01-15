@@ -32,6 +32,7 @@ export const router = createBrowserRouter(
             <Route path="impressum" element={<Impressum />} />
             <Route path="abfrage" element={<Abfrage />} />
 
+
             <Route path="start" element={<AssessStart/>} loader={assessStartLoader}/>
             <Route 
                 path="assessment/:category/:step?" 
@@ -42,7 +43,7 @@ export const router = createBrowserRouter(
 
             {/* <Route path="/" element={<UserLayout />}/> */}
 
-            <Route element={<ProtectedRoute user="hallo" />} >
+            <Route element={<ProtectedRoute/>} >
                 <Route path="dashboard" element={<UserLayout />} >
                             <Route index element={<DashBoard />} />
                             {/* <Route path="dashboard" element={<DashBoard />} /> */}

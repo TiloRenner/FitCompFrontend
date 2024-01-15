@@ -7,14 +7,17 @@ import { UserContext } from '../userContext';
 
 
 export default function HeaderUser(){ 
-    const {user}=useContext(UserContext)
+    // const {user}=useContext(UserContext)
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleMenu = () => {
     setIsOpen(!isOpen);
     };
 
-
+    function handleLogout(){
+        sessionStorage.removeItem("userLoggedIn")
+        window.location.reload()
+    }
 
     return (
         <header>
@@ -68,9 +71,9 @@ export default function HeaderUser(){
                     <NavLink to="/trainingsplan" className="text-lg">
                     Produkte
                     </NavLink>
-                    <NavLink to="/" className="text-lg">
+                    <div onClick={handleLogout} className="text-lg">
                     Logout
-                    </NavLink>
+                    </div>
                 </ul>
                 </div>
             </nav>

@@ -23,10 +23,10 @@ function Slider({question,gotoNextPage, resetValue})
     }
 
 
-    return <div className="slidecontainer">
-    <input type="range" min={question.answers[0].valueMin} max={question.answers[0].valueMax} value={sliderValue}  className="slider" id="myRange" onChange={(e) => setSliderValue(e.target.value)}></input><p>{sliderValue} {question.answers[0].aTextGerman}</p>
+    return <div className="slidecontainer space-y-4">
+    <input type="range" min={question.answers[0].valueMin} max={question.answers[0].valueMax} value={sliderValue}  className="slider" id="myRange" onChange={(e) => setSliderValue(e.target.value)}></input><p className="text-xl">{sliderValue} {question.answers[0].aTextGerman}</p>
    
-    <button onClick={sendValue}>Weiter</button>
+    <button className="text-lg text-blue-500 border-2 border-blue-500 hover:bg-blue-500 hover:text-white px-4 py-2" onClick={sendValue}>Weiter</button>
   </div>
 
 }
