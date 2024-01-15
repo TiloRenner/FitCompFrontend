@@ -7,6 +7,8 @@ import { ProgressBar } from "../components/ProgressBar";
 
 const API_URL = import.meta.env.VITE_API_URL
 
+
+
 export default function Assessment({}){
 
     const navigate = useNavigate()
@@ -18,7 +20,7 @@ export default function Assessment({}){
     const [ progress, setProgress ] = useState(0);
     const nextStep = Number(stepParam)+1
     const questions = useLoaderData()
-
+    
     //console.log("Answered Questions State:", answeredQuestions)
     //console.log("PageDataA - state:", currentCategory, " Category: ", categoryParam," Step: ", stepParam)
 
@@ -71,16 +73,19 @@ export default function Assessment({}){
     }
 
     function sendAssessmentAnswers()
-    {
-        localStorage.setItem('assessmentData', JSON.stringify(answeredQuestions));
+    {   
 
+        const assesmentDataToSend = 
+        {
+            category:currentCategory,
+            answers: answeredQuestions
+        };
+        console.log(assesmentDataToSend);
+        localStorage.setItem('assessmentData', JSON.stringify(assesmentDataToSend));
+        navigate('/register');
         // console.log("send answers")
 
-        // const assesmentDataToSend = 
-        // {
-        //     category:currentCategory,
-        //     answers: answeredQuestions
-        // }
+     
 
         // const fetchAdjustedProduct = async ()=>
         //   {
