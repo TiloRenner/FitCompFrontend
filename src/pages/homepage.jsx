@@ -4,8 +4,39 @@ import step1 from "../images/abfrage.png";
 import step2 from "../images/ergebnisse.png";
 import step3 from "../images/training.png"
 
+import { UserContext } from "../components/userContext";
+import { AuthContext } from "../components/authContext";
+
+const API_URL = import.meta.env.VITE_API_URL  
+
 export default function Homepage () {
 
+    console.log("Run Homepage")
+
+    const baseURL = API_URL;
+
+    const checkLogin = async() => {
+        const res = await fetch(API_URL+ '/authentication/status',{
+            withCredentials: true,
+            credentials: 'include'})
+        console.log("Res:", res)
+        const data = await res.json();
+        console.log("LoginData:" , data)
+
+    }
+    checkLogin()
+
+
+   /* console.log("Check Login Status:")
+    const res = fetch(API_URL+ '/assessment/categories')
+    .then(response => {
+      console.log("LoginResponse:",response)
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+    }).then(data => {
+        console.log("Data: " )
+    })*/
 
 
 return (

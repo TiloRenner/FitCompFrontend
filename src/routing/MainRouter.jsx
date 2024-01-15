@@ -18,9 +18,6 @@ import ProtectedRoute from '../components/ProtectedRoutes';
 
 
 
-
-
-
 export const router = createBrowserRouter(
     createRoutesFromElements(
         

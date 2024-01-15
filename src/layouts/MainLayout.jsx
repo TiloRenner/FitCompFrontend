@@ -6,7 +6,11 @@ import { useLocation } from "react-router-dom";
 
 
 
+
 export const Layout = () => {
+    console.log("Run Main Layout")
+
+
     const { pathname } = useLocation();
     // Define the paths where you don't want to show the MainLayout
     const noLayoutPaths = ["/login", "/register", "/dashboard"];

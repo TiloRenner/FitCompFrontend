@@ -5,10 +5,26 @@ import './App.css'
 import Homepage from './pages/homepage';
 import { AuthContext } from "./components/authContext"
 
+
+
 function App() {
   console.log("Run App")
   const [authToken, setAuthToken] = useState(null)
   const contextValue = { authToken , setAuthToken };
+  console.log("Run App")
+
+
+
+  /*fetch(baseURL + '/authentication/status' , {
+   method: 'GET',
+   withCredentials: true,
+   credentials: 'include',
+   headers: {
+     'Content-Type': 'application/json',
+   },
+   body: JSON.stringify({ username, password }),
+  })*/
+
 
   return  (
     
