@@ -7,20 +7,20 @@ import { UserContext } from '../userContext';
 
 
 export default function HeaderUser(){ 
-    const {user}=useContext(UserContext)
+    //const {user}=useContext(UserContext)
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleMenu = () => {
     setIsOpen(!isOpen);
     };
 
-
+    function handleLogout(){
+        sessionStorage.removeItem("userLoggedIn")
+        window.location.reload()
+    }
 
     return (
         <header>
-
-  
-
                 <nav className={`flex flex-col text-white p-4 lg:fixed lg:top-0 lg:left-0 lg:h-full lg:overflow-hidden lg:transition-all lg:duration-200 lg:ease-in-out lg:transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} translate-x-0 lg:static lg:overflow-visible`}>
  
 
@@ -68,9 +68,9 @@ export default function HeaderUser(){
                     <NavLink to="/trainingsplan" className="text-lg">
                     Produkte
                     </NavLink>
-                    <NavLink to="/" className="text-lg">
+                    <div onClick={handleLogout} className="text-lg">
                     Logout
-                    </NavLink>
+                    </div>
                 </ul>
                 </div>
             </nav>

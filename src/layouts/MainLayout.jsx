@@ -12,10 +12,10 @@ export const Layout = () => {
     const noLayoutPaths = ["/login", "/register", "/dashboard"];
    
     // Check if the current path is in the noLayoutPaths array
-    const shouldRenderLayout = !noLayoutPaths.includes(pathname);  
+    const shouldRenderLayout = noLayoutPaths.includes(pathname);  
     return (
         <>
-          {shouldRenderLayout && <MainLayout />}
+          
           <Outlet />
         </>
       );

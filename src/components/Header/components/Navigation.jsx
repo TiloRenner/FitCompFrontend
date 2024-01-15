@@ -10,8 +10,12 @@ export default function Navigation(){
     setIsOpen(!isOpen);
     };
 
+    const userLoggedIn = sessionStorage.getItem("userLoggedIn")
 
-
+  function handleLogout(){
+    sessionStorage.removeItem("userLoggedIn");
+    window.location.reload()
+  }
     return (
 
         <nav className='flex flex-col lg:flex-row justify-between text-white p-4'>
@@ -35,7 +39,7 @@ export default function Navigation(){
             <NavLink to="/aboutus" className="text-lg">
               About us
             </NavLink>
-            <NavLink to="/login" className="text-lg">
+             <NavLink to="/login" className="text-lg">
               Login/Register
             </NavLink>
           </ul>
