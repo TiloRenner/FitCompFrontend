@@ -41,7 +41,7 @@ export default function DashBoard () {
 
     return (
     <>
-    <div className="flex justify-start items-start h-[700px] mt-20 ml-20">
+    <div className="flex justify-start items-start h-[700px] mt-20 ml-80">
         
         <div className="flex flex-col space-y-8 ">
         <h1 className="text-left">Dashboard</h1>

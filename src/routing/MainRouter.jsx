@@ -9,6 +9,7 @@ import Impressum from '../pages/impressum';
 import Login from '../pages/login';
 import NotFoundPage from '../components/NotFoundPage';
 import Abfrage from '../pages/abfrage';
+import TrainingsPlan from '../pages/trainingsplan';
 import AssessStart,{assessStartLoader} from '../pages/assessStart';
 import Assessment,{assessmentLoader} from '../pages/assessment';
 import DankeAbfrage from '../pages/dankeabfrage';
@@ -46,7 +47,7 @@ export const router = createBrowserRouter(
             <Route element={<ProtectedRoute/>} >
                 <Route path="dashboard" element={<UserLayout />} >
                             <Route index element={<DashBoard />} />
-                            {/* <Route path="dashboard" element={<DashBoard />} /> */}
+                            <Route path="trainingsplan" element={<TrainingsPlan />} />
                 </Route>
                 </Route>
             <Route path="*" element={<NotFoundPage/>}/>

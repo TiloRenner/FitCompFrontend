@@ -59,7 +59,7 @@ export default function HeaderUser(){
                     <NavLink to="/dashboard" className="text-lg">
                     Dashboard
                     </NavLink>
-                    <NavLink to="/trainingsplan" className="text-lg">
+                    <NavLink to="/dashboard/trainingsplan" className="text-lg">
                     Trainingsplan
                     </NavLink>
                     <NavLink to="/trainingsplan" className="text-lg">
