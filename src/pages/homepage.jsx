@@ -3,6 +3,7 @@ import headerbild from "../images/people.jpg"
 import step1 from "../images/abfrage.png";
 import step2 from "../images/ergebnisse.png";
 import step3 from "../images/training.png"
+import { useContext, useEffect } from "react";
 
 import { UserContext } from "../components/userContext";
 import { AuthContext } from "../components/authContext";
@@ -14,17 +15,44 @@ export default function Homepage () {
     console.log("Run Homepage")
 
     const baseURL = API_URL;
+    const { authToken, setAuthToken} = useContext(AuthContext)
 
-    const checkLogin = async() => {
+    /*const checkLogin = async() => {
         const res = await fetch(API_URL+ '/authentication/status',{
             withCredentials: true,
             credentials: 'include'})
         console.log("Res:", res)
         const data = await res.json();
         console.log("LoginData:" , data)
+        if(data.role)
+        {
+            console.log("logged in, set token")
+            setAuthToken(data.role)
+        }
+    }*/
+    //checkLogin()
 
+    useEffect(() => {
+        console.log("StartUseEffect")
+        async function checkLogin(){
+            const res = await fetch(API_URL+ '/authentication/status',{
+                
+                credentials: 'include'})
+            console.log("Res:", res)
+            const data = await res.json();
+            console.log("LoginData:" , data)
+            if(data.role)
+            {
+                console.log("logged in, set token: ", data.role)
+                setAuthToken(data.role)
+                console.log("AuthToken2:" , authToken)
+            }
+        }
+        checkLogin()
     }
-    checkLogin()
+
+    ,[])
+    console.log("AuthToken:" , authToken)
 
 
    /* console.log("Check Login Status:")
