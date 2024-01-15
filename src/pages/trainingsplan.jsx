@@ -8,11 +8,16 @@ export default function TrainingsPlan () {
     const [trainingsData, setTrainingsData] = useState([])
     const baseURL = API_URL;
 
+    console.log(trainingsData)
+
+
+// Fetching TrainingsData
+
     useEffect(() => {
         const fetchData = async () => {
         // setIsLoading(true);
       
-        const baseURL = API_URL + '/user/trainingsplan' ;
+        const baseURL = API_URL + '/user/trainingplan' ;
       
             
       try {
@@ -37,6 +42,8 @@ export default function TrainingsPlan () {
       fetchData();
       }, []);
 
+
+      
     return (
         <h1>Hallo Trainingsplan</h1>
     )
