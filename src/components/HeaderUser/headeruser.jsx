@@ -9,6 +9,7 @@ const API_URL = import.meta.env.VITE_API_URL
 export default function HeaderUser(){ 
     // const {user}=useContext(UserContext)
     const [isOpen, setIsOpen] = useState(true);
+    const userLoggedIn = sessionStorage.getItem('userLoggedIn')
 
     const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -31,6 +32,8 @@ export default function HeaderUser(){
         window.location.reload()
     }
 
+    const path = userLoggedIn ? "/dashboard" : "/";
+
     return (
         <header>
 
@@ -41,7 +44,7 @@ export default function HeaderUser(){
 
                 {/* <nav className={'flex flex-col text-white p-4 '}> */}
                 <div className='flex items-center justify-between'>
-               {isOpen ? <NavLink to="/"><img className="h-16" src={logo} alt="Logo" /></NavLink> : ''}
+               {isOpen ? <NavLink to={path}><img className="h-16" src={logo} alt="Logo" /></NavLink> : ''}
                 
                 <button onClick={toggleMenu} className=" block lg:hidden">
                 {isOpen ? (
