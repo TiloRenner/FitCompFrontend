@@ -15,7 +15,7 @@ export default function UserLayout() {
   return (
         <>
         <HeaderUser  />
-        <main className='h-screen'>
+        <main className=''>
         <Outlet />
         </main>
         <FooterUser  />

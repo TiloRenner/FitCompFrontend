@@ -18,14 +18,14 @@ import Register from '../pages/register';
 import ProtectedRoute from '../components/ProtectedRoutes';
 
 
-
-
+// const userLoggedIn = sessionStorage.getItem('userLoggedIn')
+// const path = userLoggedIn ? "/dashboard" : "/";
 
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
         
-        <Route path="/" element={<MainLayout/>}>
+        <Route path="/" element={<Layout/>}>
             <Route index element={<Homepage />}/>
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />    
