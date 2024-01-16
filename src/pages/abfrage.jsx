@@ -161,14 +161,6 @@ export default function Abfrage () {
       fetchData();
       }, []);
 
-<<<<<<< Updated upstream
-=======
-      let frage;
-      if (question !== undefined && Array.isArray(question)) {
-       frage = question.map(q => q.questionTextGerman);
-      }
-      
->>>>>>> Stashed changes
 
       const frage = question.map(question => {
         return {

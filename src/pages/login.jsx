@@ -90,6 +90,7 @@ export default function Login () {
       
       // const baseURL = "http://localhost:8080";
       const baseURL = API_URL;
+      console.log("Start Login Post Request")
 
       fetch(baseURL + '/authentication/login' , {
        method: 'POST',
