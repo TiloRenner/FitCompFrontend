@@ -3,7 +3,7 @@ import logo from "../../../images/iconv2_capri.png";
 import { useState } from 'react';
 
 export default function Navigation(){ 
-    
+    const userLoggedIn = sessionStorage.getItem("userLoggedIn")
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleMenu = () => {
@@ -11,12 +11,12 @@ export default function Navigation(){
     };
 
 
-
+const path=userLoggedIn ? "/dashboard": "/"
     return (
 
         <nav className='flex flex-col lg:flex-row justify-between text-white p-4'>
         <div className='flex items-center justify-between'>
-          <NavLink to="/"><img className="h-16" src={logo} alt="Logo" /></NavLink>
+          <NavLink to={path}><img className="h-16" src={logo} alt="Logo" /></NavLink>
         
         <button onClick={toggleMenu} className="lg:hidden">
           {isOpen ? (
