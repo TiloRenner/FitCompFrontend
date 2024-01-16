@@ -54,12 +54,12 @@ export default function Homepage () {
 return (
 <>
 <div 
-    className="h-[800px] bg-[url('src/images/paar.jpg')] lg:bg-left bg-center bg-no-repeat bg-cover flex justify-center lg:justify-start items-end lg:items-center">
+    className="h-[800px] bg-[url('./images/paar.jpg')] lg:bg-left bg-center bg-no-repeat bg-cover flex justify-center lg:justify-start items-end lg:items-center">
     <div className="w-[80%] md:w-[30%] flex flex-col gap-4 pb-10 lg:ml-10 items-center text-lg">
         <p className=" text-white lg:text-3xl">
             Change your life for the better with your personal fitness plan
             </p>
-            <NavLink to="/abfrage" > <button className="text-white text-lg callbtn py-4 rounded-3xl w-60">
+            <NavLink to="/start" > <button className="text-white text-lg callbtn py-4 rounded-3xl w-60">
             Create your plan now
             </button> </NavLink> 
     </div>

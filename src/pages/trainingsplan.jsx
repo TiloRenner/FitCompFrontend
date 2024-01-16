@@ -76,12 +76,11 @@ export default function TrainingsPlan () {
 
       console.log("ex", exercises)
     return (
-      <div className="flex flex-col items-center space-y-8">
+      <div className="flex flex-col items-center space-y-8  h-dvh">
         <div className="flex flex-col items-start">
         <h1 className="text-4xl py-10">Trainingsplan von User</h1>
         <p>Trainingswoche: </p>
         <p>Trainingslevel: </p>
-        {/* <p>Trainingsziel: {trainingsData?.plan.exercises[0].map(ziel => ziel[0].de)} </p> */}
         <p>Hier ist dein persönlicher Trainingsplan</p>
         </div>
 

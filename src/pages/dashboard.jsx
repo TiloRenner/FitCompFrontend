@@ -45,6 +45,25 @@ export default function DashBoard () {
         
         <div className="flex flex-col space-y-8 ">
         <h1 className="text-left">Dashboard</h1>
+        <h3 className="text-left text-3xl">Trainingslevel Übungen</h3>
+        <div className="flex space-x-20 text-left">
+            <div>
+                 <p className="font-bold">Liegestütze</p>
+                 <p className="">Get Level</p>
+            </div>
+            <div>
+                <p className="font-bold">Crunches</p>
+                <p>Get Level</p>
+            </div>
+            <div>
+                <p className="font-bold">Klimmzüge</p>
+                <p>Get Level</p>
+            </div>
+            <div>
+                <p className="font-bold">Kniebeuge</p>
+                <p>Get Level</p>
+            </div>
+        </div>
         <h3 className="text-left text-3xl">Wiederholungen gesamt</h3>
         <div className="flex space-x-20 text-left">
             <div>
