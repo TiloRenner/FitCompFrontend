@@ -6,6 +6,8 @@ export default function ResultAbfrage () {
 
     const [userData, setUserData] = useState([]);
 
+    console.log(localStorage)
+
     console.log(userData)
    
     // useEffect(() => {

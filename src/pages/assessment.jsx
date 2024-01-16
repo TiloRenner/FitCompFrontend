@@ -82,7 +82,7 @@ export default function Assessment({}){
         };
         console.log(assesmentDataToSend);
         localStorage.setItem('assessmentData', JSON.stringify(assesmentDataToSend));
-        navigate('/register');
+        navigate('/result');
         // console.log("send answers")
 
      
@@ -132,14 +132,16 @@ export default function Assessment({}){
 
         console.log("MatchingAnswered:", matchingAnswered)
         return <>
-            <div className="flex flex-col items-center h-dvh">
-                <div className="mt-20 w-[90%] ">
+        <div className=" w-[100%] ">
                   <ProgressBar progress={progress}   />
                   </div>
-        <h2 className="text-3xl py-10 mt-10 lg:mt-60">{questions.questions[stepParam-1].questionTextGerman}</h2>
-        <button className="text-lg ">{buildQuestionLayout(questions.questions[stepParam-1],gotoNextPage,matchingAnswered)}</button>
+            <div className="bg-[url('./images/paar_abfrage.png')] bg-cover bg-center lg:bg-left h-screen flex flex-col items-start justify-center lg:justify-start lg:pt-20 lg:pl-20">
+               <div className="bg-white opacity-70 rounded-lg p-4 lg:p-10 lg:w-[33%]">
+        <h2 className="text-lg font-bold pb-10">{questions.questions[stepParam-1].questionTextGerman}</h2>
+        <button className="">{buildQuestionLayout(questions.questions[stepParam-1],gotoNextPage,matchingAnswered)}</button>
+        </div> 
         </div>
-    <br></br>
+
     </>
     }
 }
@@ -231,11 +233,17 @@ function AssessmentOverview({questions,answers,gotoPage,sendAssessmentAnswers})
 
             console.log(question.questionTextGerman)
             return <div className="" key={index}>
-                <div className="flex flex-col justify-center items-center space-y-6">
-                <h3 className="text-xl">{question.questionTextGerman}</h3>
-                <p className="text-3xl text-gray-400">{matchingAnswer.valueEntered}</p>
-                <button className="border-2 text-blue-500 border-blue-500 active:bg-blue-500 hover:bg-blue-500 hover:text-white text-lg px-4 py-2 mt-20" onClick={(e)=> { gotoPage(index+1)}}>Change</button>
+                <div className="">
+                <h3 className="text-sm">{question.questionTextGerman}</h3>
                 </div>
+                <div className="flex">
+                <div className="flex text-3xl text-gray-400"><p>{matchingAnswer.valueEntered}</p>
+                </div>
+                <div className="flex">
+                <button className="border-2 text-blue-500 border-blue-500 active:bg-blue-500 hover:bg-blue-500 hover:text-white text-lg px-4 py-2 mt-20" onClick={(e)=> { gotoPage(index+1)}}>Ändern</button>
+                </div>
+                </div>
+                
             </div>
         }
         else
@@ -251,11 +259,23 @@ function AssessmentOverview({questions,answers,gotoPage,sendAssessmentAnswers})
     })
     console.log(questionsDisplay)
 
-    return <div className="flex flex-col justify-center items-center h-dvh space-y-8">
-        <h2 className="text-5xl">Overview</h2>
+    return <div className="flex gap-4 py-10"> 
+        <div className="flex flex-col justify-center items-center p-4 bg-white opacity-50 rounded-lg">
+        <h2 className="text-2xl">Übersicht</h2>
+        <div>
+        <p>Hier findest du dein Antworten in der Übersicht. Wenn du noch ein paar Änderungen zu den einzelnen Fragen machen möchtest, 
+            kannst du das jetzt tun, in dem du auf "Change" klickst</p>
         {questionsDisplay}
-        <button className="callbtn" onClick={(e)=> { sendAssessmentAnswers()}}>Send</button>
+        </div>
+        </div>
 
+        <div className="p-4 flex flex-col place-content-center items-center bg-cyan-500 bg-opacity-70 rounded-lg">
+       <p className="text-white"> Wenn du alle Fragen beantwortest hast, kannst du jetzt deinen individuellen Trainingsplan generieren.
+        Dein Trainingsplan wird nach der Registrierung für dich verfügbar sein.
+        </p>
+        <button className="callbtn" onClick={(e)=> { sendAssessmentAnswers()}}>Send</button>
+        </div>
+    
     </div>
 
 }
