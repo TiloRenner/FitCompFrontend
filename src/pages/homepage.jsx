@@ -1,10 +1,53 @@
-import { NavLink } from "react-router-dom";
+import { NavLink,useNavigate } from "react-router-dom";
 import headerbild from "../images/people.jpg"
 import step1 from "../images/abfrage.png";
 import step2 from "../images/ergebnisse.png";
 import step3 from "../images/training.png"
+import { useEffect } from "react";
+
+const API_URL = import.meta.env.VITE_API_URL   
 
 export default function Homepage () {
+
+    const baseURL = API_URL + '/authentication/status' ;
+    const navigate = useNavigate()
+
+    useEffect(()=>{
+        console.log("Home Use Effect")
+
+        async function checkLoginStatus()
+        {
+            try {
+      
+                const response = await fetch(`${baseURL}`, { credentials: 'include',})
+                if (!response.ok) {
+                    console.log("response LoginStatus:", response);
+                throw new Error('Network response was not ok');
+                }
+              
+                const data = await response.json();
+                console.log("data von LoginStatus:", data);
+                if(data.role)
+                {
+                sessionStorage.setItem("userLoggedIn", true )
+                navigate('/dashboard');
+
+                }
+                // console.log("array", Array.isArray(data.results));
+              } catch (error) { 
+                console.error ('There has been a problem with your fetch operation: ', error);
+              } finally {
+                //  setIsLoading(false);
+                }
+        }
+
+        checkLoginStatus()
+
+
+
+
+    },[])
+
 
 
 
