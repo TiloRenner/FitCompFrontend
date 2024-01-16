@@ -15,8 +15,11 @@ export default function Login () {
     const [password, setPassword] = useState('');
     const [ user, setUser ] = useState('')
     const { authToken, setAuthToken} = useContext(AuthContext)
+    const [showPassword, setShowPassword] = useState(false);
    
-
+    function togglePasswordVisibility() {
+      setShowPassword(prevState => !prevState);
+     }
     // const { user, setUser } = useContext(UserContext);
 
     // console.log(userId)
@@ -156,13 +159,23 @@ export default function Login () {
                     </div>
                     </div>
                     <div className="relative">
-                    <input className=" pl-10 h-10 border-grey-100 border-solid border-2 rounded-lg" type="text" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                    <input className=" pl-10 h-10 border-grey-100 border-solid border-2 rounded-lg " type={showPassword ? "text" : "password"} placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="grey" className="w-6 h-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="grey" className="w-6 h-6 ">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
                     </svg>
                     </div>
+                   
+                    
+                    
+                   
                     </div>
+                    <button type="button" onClick={togglePasswordVisibility} className="relative">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 absolute -top-12 left-20 h-6 ">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                    </svg>
+                    </button>
                     <span className="flex justify-end" style={{fontSize: "12px"}}>Forget password?</span>
                     <button onClick={handleSubmit} className="callbtn">Login</button>
                     <p className="text-gray-500" style={{fontSize: "11px"}}>Du hast noch keinen Account? Registriere dich <NavLink to="/register"><span className="register_login">hier</span> </NavLink>?</p>

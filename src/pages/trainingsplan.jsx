@@ -42,9 +42,60 @@ export default function TrainingsPlan () {
       fetchData();
       }, []);
 
-
+      // const train = trainingsData.plan.map((exercise) => 
+      // exercise.averageLevel)
+      // const infoArrays = trainingsData.map(exercise => exercise.info);
       
+
+      // const kneePressExercise = trainingsData.find(exercise => 
+      //   exercise.info.some(info => info.name === 'Kniebeugen')
+      //  );
+
+      //  console.log('exercise',train)
+
+      const exercises = trainingsData?.plan?.exercises
+      const ListOfExercises = exercises?.map((item)=>{
+       return (
+        <div className="flex flex-col space-y-2 items-start">
+       <h2 className="text-2xl font-bold">Übung: {item.info[0].name}</h2> 
+       <p>Beschreibung: {item.info[0].desc}</p>
+       {/* <p>Reps:{item[0].reps}</p> */}
+       <p className="font-bold">Mach {item.sets} Sätze à {item.reps} Wiederholungen</p>
+       
+       {/* {exercises?.map((item)=>{
+       return (
+        <>
+        <p>Wiederholungen: {item.reps}</p>
+        <p>Sätze: {item.sets}</p>
+        </>
+       )})} */}
+        
+       </div>
+       )
+      })
+
+      console.log("ex", exercises)
     return (
-        <h1>Hallo Trainingsplan</h1>
+      <div className="flex flex-col items-center space-y-8">
+        <div className="flex flex-col items-start">
+        <h1 className="text-4xl py-10">Trainingsplan von User</h1>
+        <p>Trainingswoche: </p>
+        <p>Trainingslevel: </p>
+        {/* <p>Trainingsziel: {trainingsData?.plan.exercises[0].map(ziel => ziel[0].de)} </p> */}
+        <p>Hier ist dein persönlicher Trainingsplan</p>
+        </div>
+
+        <div className="text-left">
+
+        <h2>Starte deine Trainingssession!</h2>
+        <p>Trainingszeit: </p>
+        <p>Akkordion: Wichtige Informationen zu deinem Trainingsplan</p>
+        </div>
+       
+        
+        {/* {exercises?.[0].reps} */}
+        {ListOfExercises}
+        
+        </div>
     )
 }
