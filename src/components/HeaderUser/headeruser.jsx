@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { useState } from 'react';
 import { UserContext } from '../userContext';
 
-
+const API_URL = import.meta.env.VITE_API_URL   
 
 export default function HeaderUser(){ 
     // const {user}=useContext(UserContext)
@@ -14,7 +14,19 @@ export default function HeaderUser(){
     setIsOpen(!isOpen);
     };
 
-    function handleLogout(){
+    async function handleLogout(){
+        console.log("Start Logout")
+        const baseURL = API_URL + '/authentication/logout' ;
+        const response = await fetch(`${baseURL}`, { credentials: 'include',})
+        if (!response.ok) {
+            const responseMSG = await response.json();
+            console.log("Response Message:" , responseMSG)
+            throw new Error('Network response was not ok');
+            }
+          
+        const data = await response.json();
+        console.log("data von fetch:", data);
+
         sessionStorage.removeItem("userLoggedIn")
         window.location.reload()
     }
