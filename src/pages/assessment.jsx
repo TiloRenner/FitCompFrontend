@@ -135,7 +135,7 @@ export default function Assessment({}){
         <div className=" w-[100%] ">
                   <ProgressBar progress={progress}   />
                   </div>
-            <div className="bg-[url('./images/paar_abfrage.png')] bg-cover bg-center lg:bg-left h-screen flex flex-col items-start justify-center lg:justify-start lg:pt-20 lg:pl-20">
+            <div className="bg-[url('/images/paar_abfrage.png')] bg-cover bg-center lg:bg-left h-screen flex flex-col items-start justify-center lg:justify-start lg:pt-20 lg:pl-20">
                <div className="bg-white opacity-70 rounded-lg p-4 lg:p-10 lg:w-[33%]">
         <h2 className="text-lg font-bold pb-10">{questions.questions[stepParam-1].questionTextGerman}</h2>
         <button className="">{buildQuestionLayout(questions.questions[stepParam-1],gotoNextPage,matchingAnswered)}</button>
