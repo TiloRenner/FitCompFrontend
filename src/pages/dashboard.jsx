@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom"
 
 const API_URL = import.meta.env.VITE_API_URL   
@@ -6,6 +7,11 @@ export default function DashBoard () {
 
     const assessmentDataFromLocalStorage = JSON.parse(localStorage.getItem('assessmentData'));
     const baseURL = API_URL;
+    const [dashboard, setDashboard] = useState([]);
+
+    console.log('Dashboarddata',dashboard)
+
+// Fetching Gernerierung Trainingplan
 
   if (assessmentDataFromLocalStorage) {
      const fetchAdjustedProduct = async ()=>
@@ -39,9 +45,41 @@ export default function DashBoard () {
         console.log('No data found in local storage.');
        }
 
+    //    Fetching Dashboard Daten 
+
+    useEffect(() => {
+        const fetchData = async () => {
+        // setIsLoading(true);
+      
+        const baseURL = API_URL + '/user/dashboard' ;
+      
+            
+      try {
+      
+        const response = await fetch(`${baseURL}`, { credentials: 'include',})
+        if (!response.ok) {
+        throw new Error('Network response was not ok');
+        }
+      
+        const data = await response.json();
+        console.log("data von fetch:", data);
+        // console.log("array", Array.isArray(data.results));
+        setDashboard(data);
+        
+      
+      } catch (error) { 
+        console.error ('There has been a problem with your fetch operation: ', error);
+      } finally {
+        //  setIsLoading(false);
+        }
+      };
+      fetchData();
+      }, []);
+
+
     return (
     <>
-    <div className="flex justify-start items-start h-[700px] mt-20 ml-80">
+    <div className="flex justify-center items-start py-20">
         
         <div className="flex flex-col space-y-8 ">
         <h1 className="text-left">Dashboard</h1>
@@ -98,7 +136,7 @@ export default function DashBoard () {
         <div className="flex space-x-20 text-left">
             <div>
             <p className="font-bold">Absolvierte Trainings</p>
-            <p>5</p>
+            <p>{dashboard.trainingsDone}</p>
             </div>
             <div>
                <p className="font-bold">Trainingzeit gesamt</p> 
