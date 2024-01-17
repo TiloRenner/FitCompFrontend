@@ -57,7 +57,7 @@ export default function Register () {
     return (
     <>
     <section>
-            <div className="bg-[url('/images/people.jpg')] bg-cover flex justify-center items-center h-[700px]">
+            <div className="bg-[url('images/people.jpg')] bg-cover flex justify-center items-center h-[700px]">
                     <div className="flex flex-col w-[70%] md:w-[33%] bg-white bg-opacity-80 p-6 rounded-lg">
                     <div className="flex justify-center items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1" stroke="#00BBE4" class="w-20 h-20">

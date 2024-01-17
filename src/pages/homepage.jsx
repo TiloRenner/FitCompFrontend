@@ -67,8 +67,8 @@ return (
 
 
 <section className="py-12 h-full">
-    <h1 className="text-3xl">Erstelle deinen Fitnessplan - so geht's</h1>
-    <div className="h-full flex flex-col md:flex-row items-center space-y-10 md:space-x-20 pb-10">
+    <h1 className=" text-2xl lg:text-3xl">Erstelle deinen Fitnessplan - so geht's</h1>
+    <div className="h-full flex flex-col md:flex-row items-center space-y-6 md:space-x-20 p-10">
         <div className="w-[80%] h-full flex flex-col items-center" >
             <h3>Schritt 1</h3>
             <img className="my-8" src={step1} alt="" />
@@ -77,7 +77,7 @@ return (
         <div className="w-[80%] flex flex-col items-center">
         <h3>Schritt 2</h3>
             <img className="my-8" src={step2} alt="" />
-            <p>Im zweiten Schritt erhältst du von uns eine Einstufung deines Trainingslevels und einen auf dich zugeschittenen Trainingsplan.</p>
+            <p>Im zweiten Schritt erstellen wir, auf Basis deiner Antworten, einen auf dich zugeschittenen Trainingsplan.</p>
         </div>
         <div className="w-[80%] flex flex-col items-center">
         <h3>Schritt 3</h3>
