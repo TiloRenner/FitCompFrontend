@@ -55,7 +55,7 @@ export default function TrainingsPlan () {
              {
                console.log("Try Fetch Product")
                try{
-                 const response = await fetch(API_URL + " /user/completetraining ",{
+                 const response = await fetch(API_URL + "/user/completetraining ",{
                    method: 'POST',
                    withCredentials: true,
                    credentials: 'include',
