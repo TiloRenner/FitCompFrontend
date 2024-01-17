@@ -82,7 +82,7 @@ export default function Assessment({}){
         };
         console.log(assesmentDataToSend);
         localStorage.setItem('assessmentData', JSON.stringify(assesmentDataToSend));
-        navigate('/result');
+        navigate('/register');
         // console.log("send answers")
 
      
