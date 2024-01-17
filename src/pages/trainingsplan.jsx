@@ -102,7 +102,7 @@ export default function TrainingsPlan () {
        <p className="font-bold">Mach {item.sets} Sätze à {item.reps} Wiederholungen</p>
        <p>Wie viele Wiederholungen hast du geschafft?
        </p>
-       <input className="border-gray-300 border-2 w-10" min="0" max="100" type="number" name="Reps" value={exData} onchange={(e) => setExData(e.target.value)} />
+       <input className="border-gray-300 border-2 w-10" min="0" max="100" type="number" name="Reps" value={exData} onChange={(e) => setExData(e.target.value)} />
        {/* {exercises?.map((item)=>{
        return (
         <>
@@ -126,7 +126,7 @@ export default function TrainingsPlan () {
         <br />
         <p>Trainingswoche: 1</p>
         <p>Trainingseinheit: 3</p>
-        
+        <p>Trainingziel: </p>
         
         </div>
         </div>

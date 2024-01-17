@@ -7,9 +7,11 @@ export default function DashBoard () {
 
     const assessmentDataFromLocalStorage = JSON.parse(localStorage.getItem('assessmentData'));
     const baseURL = API_URL;
-    const [dashboard, setDashboard] = useState([]);
+    const [dashboard, setDashboard] = useState(null);
 
     console.log('Dashboarddata',dashboard)
+    // const exercises = dashboard?.plan[0].level
+    // console.log("level", exercises)
 
 // Fetching Gernerierung Trainingplan
 
@@ -78,7 +80,7 @@ export default function DashBoard () {
 
 
     return (
-    <>
+    <div>
     <div className="flex justify-center items-start py-20">
         
         <div className="flex flex-col space-y-8 ">
@@ -87,22 +89,21 @@ export default function DashBoard () {
         <div className="flex space-x-20 text-left">
             <div>
                  <p className="font-bold">Liegestütze</p>
-                 <p className="">Get Level</p>
+                 <p className="">{dashboard?.plan[0].level}</p>
             </div>
             <div>
                 <p className="font-bold">Crunches</p>
-                <p>Get Level</p>
+                <p>{dashboard?.plan[1].level}</p>
             </div>
             <div>
                 <p className="font-bold">Klimmzüge</p>
-                <p>Get Level</p>
-            </div>
+                <p>{dashboard?.plan[2].level}</p></div>
             <div>
                 <p className="font-bold">Kniebeuge</p>
-                <p>Get Level</p>
+                <p>{dashboard?.plan[1].level}</p>
             </div>
         </div>
-        <h3 className="text-left text-3xl">Wiederholungen gesamt</h3>
+        {/* <h3 className="text-left text-3xl">Wiederholungen gesamt</h3>
         <div className="flex space-x-20 text-left">
             <div>
                  <p className="font-bold">Liegestütze</p>
@@ -120,8 +121,8 @@ export default function DashBoard () {
                 <p className="font-bold">Kniebeuge</p>
                 <p>40</p>
             </div>
-        </div>
-        <h3 className="text-left text-3xl">Beliebte Übungen</h3>
+        </div> */}
+        {/* <h3 className="text-left text-3xl">Beliebte Übungen</h3>
         <div className="flex space-x-20 text-left">
             <div>
                 <p className="font-bold">Beste Übung</p>
@@ -131,21 +132,22 @@ export default function DashBoard () {
                 <p className="font-bold">Schwächste Übung</p>
                 <p>Klimmzüge</p>
             </div>
-        </div>
+        </div> */}
         <h3 className="text-left text-3xl">Zeiten</h3>
         <div className="flex space-x-20 text-left">
             <div>
             <p className="font-bold">Absolvierte Trainings</p>
-            <p>{dashboard.trainingsDone}</p>
+            <p>{dashboard?.trainingsDone}</p>
             </div>
             <div>
                <p className="font-bold">Trainingzeit gesamt</p> 
-               <p>150 Minuten</p>
+               <p>{dashboard?.timeTrained}</p>
             </div>
         </div>
     </div>
     </div>
-    </>
+    </div>
+    
     )
     
     }
